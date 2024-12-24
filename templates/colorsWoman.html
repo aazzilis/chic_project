@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./static/css/output.css">
+        <link rel="stylesheet" href="./static/css/customStyles.css">
+        <title>Document</title>
+</head>
+<body class="bg-gray-200">
+        <!-- Main Content -->
+        <main class="flex items-center justify-center h-screen">
+            <!-- Wrapper for Container and Stripes -->
+            <div class="w-full max-w-4xl">
+
+                <div class="w-full max-w-4xl flex justify-start items-start pb-5">
+                    <img src="./static/assets/img/svg/logo.svg" alt="">
+                </div>
+                <!-- Card Selection Section -->
+                <div class="bg-customWhite p-8 shadow-md relative">
+            
+                    <div class="flex flex-col items-center mt-6">
+
+                        <!-- Первые три цвета -->
+                        <div class="flex justify-center gap-20">
+                            <div class="flex flex-col items-center">
+                                <div class="w-24 h-24 border-2 border-customBlack cursor-pointer" onclick="selectSquare(this)">
+                                    <img src="./static/assets/img/png/colorsGammaWoman1.png" alt="Image 4" class="w-full h-full object-cover">
+                                </div>
+                                <span class="mt-2 text-sm text-center">Серая</span>
+                            </div>
+                    
+                            <div class="flex flex-col items-center">
+                                <div class="w-24 h-24 border-2 border-customBlack cursor-pointer" onclick="selectSquare(this)">
+                                    <img src="./static/assets/img/png/colorsGammaWoman2.png" alt="Image 5" class="w-full h-full object-cover">
+                                </div>
+                                <span class="mt-2 text-sm text-center">Бежевая</span>
+                            </div>
+                    
+                            <div class="flex flex-col items-center">
+                                <div class="w-24 h-24 border-2 border-customBlack cursor-pointer" onclick="selectSquare(this)">
+                                    <img src="./static/assets/img/png/colorsGammaWoman3.png" alt="Image 6" class="w-full h-full object-cover">
+                                </div>
+                                <span class="mt-2 text-sm text-center">Пастельная</span>
+                            </div>
+                        </div>
+                    
+                        <!-- Вторые три цвета -->
+                        <div class="flex justify-center gap-20 mt-5">
+                            <div class="flex flex-col items-center">
+                                <div class="w-24 h-24 border-2 border-customBlack cursor-pointer" onclick="selectSquare(this)">
+                                    <img src="./static/assets/img/png/colorsGammaWoman4.png" alt="Image 4" class="w-full h-full object-cover">
+                                </div>
+                                <span class="mt-2 text-sm text-center">Мягкая</span>
+                            </div>
+                    
+                            <div class="flex flex-col items-center">
+                                <div class="w-24 h-24 border-2 border-customBlack cursor-pointer" onclick="selectSquare(this)">
+                                    <img src="./static/assets/img/png/colorsGammaWoman5.png" alt="Image 5" class="w-full h-full object-cover">
+                                </div>
+                                <span class="mt-2 text-sm text-center">Темная</span>
+                            </div>
+                    
+                            <div class="flex flex-col items-center">
+                                <div class="w-24 h-24 border-2 border-customBlack cursor-pointer" onclick="selectSquare(this)">
+                                    <img src="./static/assets/img/png/colorsGammaWoman6.png" alt="Image 6" class="w-full h-full object-cover">
+                                </div>
+                                <span class="mt-2 text-sm text-center">Яркая</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    
+            
+                    <div class="flex justify-end mt-6">
+                        <div class="border-2 border-customBlack rounded-full py-1 px-2 flex items-center">
+                            <button onclick="window.location.href='skin10.html'">
+                                <img src="./static/assets/img/png/prev.png" alt="">
+                            </button>
+                            
+                            <!-- Separator -->
+                            <div class="w-1 h-8 bg-customBlack mx-2"></div>
+                            
+                            <button onclick="window.location.href='chooseDeatelnost.html'">
+                                <img src="./static/assets/img/png/next.png" alt="">
+                            </button>
+                        </div>
+                    </div>
+            
+                </div>
+
+                <div class="absolute right-28 top-72">
+
+                    <div class="rounded-xl bg-customWhite text-center border border-customBlack text-xl px-8 py-4">
+                        <p>Какая цветовая гамма вам ближе?</p>
+                    </div>
+
+                    <img src="/assets/img/png/janna-skin10.png" alt="">
+                </div>
+
+                <!-- Green and Black Stripes -->
+                <div class="w-full h-4 bg-customGreen"></div>
+                <div class="w-full h-8 bg-customBlack"></div>
+            </div>
+        </main>
+
+        <script>
+            function toggleCheckboxImage(clickedId, otherId) {
+                const clickedImage = document.getElementById(clickedId);
+                const otherImage = document.getElementById(otherId);
+    
+                // Toggle the clicked image
+                clickedImage.src = clickedImage.src.includes('likeWhite.svg') ? '/assets/img/svg/likeRed.svg' : '/assets/img/svg/likeWhite.svg';
+    
+                // Change the state of the other image
+                otherImage.src = otherImage.src.includes('likeWhite.svg') ? '/assets/img/svg/likeRed.svg' : '/assets/img/svg/likeWhite.svg';
+            }
+        </script>
+
+<script>
+    function selectSquare(element) {
+        // Remove 'selected' class from all squares
+        document.querySelectorAll('.w-24.h-24').forEach(square => {
+            square.classList.remove('selected');
+        });
+        // Add 'selected' class to the clicked square
+        element.classList.add('selected');
+    }
+</script>
+
+
+</body>
+</html>

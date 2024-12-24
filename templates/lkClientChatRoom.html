@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/css/output.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/css/customStyles.css') }}"
+    />
+    <title>Личный кабинет</title>
+  </head>
+  <body class="bg-gradient-to-r from-gray-100 to-gray-200 min-h-screen">
+    <!-- Header -->
+    <header
+      class="flex items-center justify-between p-3 bg-customWhite shadow-md"
+    >
+      <div class="ml-20">
+        <a href="{{ url_for('start_page') }}">
+          <img
+            src="{{ url_for('static', filename= 'assets/img/svg/logoHead.svg') }}"
+            alt=""
+          />
+        </a>
+      </div>
+      <div class="text-3xl cursor-pointer mr-10">
+        <img
+          src="{{ url_for('static', filename= 'assets/img/svg/burger-menu.svg') }}"
+          alt=""
+        />
+      </div>
+    </header>
+
+    <div class="container mx-auto p-6 max-w-4xl">
+      <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <img
+              src="{{ url_for('static', filename= 'assets/img/png/avatarStilist.png') }}"
+              alt="Мария"
+              class="w-12 h-12 rounded-full mr-4"
+            />
+            {% for user in recipient %} {% if user.chat_id == chat_id %}
+            <h1
+              class="text-2xl font-bold text-customBlack oswald-weight-medium"
+            >
+              Чат с {{ user.first_name }}
+            </h1>
+            {% endif %} {% endfor %}
+          </div>
+          <a
+            href="/chats"
+            onclick="leaveChat(event);"
+            class="px-4 py-2 bg-customBlack text-white rounded-lg hover:text-customBlack border-2 border-transparent hover:border-customBlack hover:bg-customGreen transition-colors oswald-weight-medium"
+          >
+            Назад к чатам
+          </a>
+        </div>
+      </div>
+
+      <!-- Список сообщений -->
+      <div class="bg-white rounded-xl shadow-lg p-6">
+        <ul id="messages" class="space-y-4 overflow-y-auto h-[500px] mb-4">
+          {% for message in messages %}
+          {%if message.first_name != username%}
+          <li class="flex items-start gap-3">
+            <img
+              src="{{ url_for('static', filename= 'assets/img/png/avatarStilist.png') }}"
+              alt="Мария"
+              class="w-8 h-8 rounded-full mt-1"
+            />
+            <div class="bg-gray-100 rounded-lg p-3 max-w-[80%]">
+              <div class="font-medium text-customBlack mb-1">
+                {{ message.first_name }}
+              </div>
+              <p class="text-customBlack">{{ message.message }}</p>
+              <div class="text-xs text-gray-500 mt-1">
+                {{ message.timestamp.split(' ')[1][:5] }}
+              </div>
+            </div>
+          </li>
+          {%endif%}
+          {%if message.first_name == username%}
+          <li class="flex justify-end gap-3">
+            <img
+              src="{{ url_for('static', filename= 'assets/img/png/avatarStilist.png') }}"
+              alt="Мария"
+              class="w-8 h-8 rounded-full mt-1"
+            />
+            <div class="bg-customBlack text-white rounded-lg p-3 max-w-[80%] justify-end">
+              <div class="font-medium mb-1">
+                {{ message.first_name }}
+              </div>
+              <p class="text-white">{{ message.message }}</p>
+              <div class="text-xs opacity-75 mt-1">
+                {{ message.timestamp.split(' ')[1][:5] }}
+              </div>
+            </div>
+          </li>
+          {%endif%}
+          {% endfor %}
+        </ul>
+
+        <!-- Форма отправки сообщения -->
+        <form id="messageForm" class="flex gap-2">
+          <input
+            type="text"
+            id="messageInput"
+            placeholder="Введите сообщение..."
+            class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen oswald-weight-medium"
+            required
+          />
+          <button
+            type="submit"
+            class="px-6 py-3 bg-customBlack text-white rounded-lg hover:text-customBlack border-2 border-transparent hover:border-customBlack hover:bg-customGreen transition-colors oswald-weight-medium"
+          >
+            Отправить
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const socket = io();
+      const chatId = "{{ chat_id }}"; // Пример ID чата
+      const username = "{{ username }}"; // Пример имени пользователя
+
+      const messagesList = document.getElementById("messages");
+      const messageForm = document.getElementById("messageForm");
+      const messageInput = document.getElementById("messageInput");
+
+      // Добавляем прокрутку при загрузке страницы
+      window.onload = function() {
+        messagesList.scrollTop = messagesList.scrollHeight;
+      };
+
+      socket.emit("join_chat", { chat_id: chatId });
+
+      socket.on("receive_message", (data) => {
+        const li = document.createElement("li");
+        const isOwnMessage = data.sender === username;
+        li.className = `flex items-start gap-3 ${
+          isOwnMessage ? "justify-end" : ""
+        }`;
+        li.innerHTML = `
+          <img 
+            src="${isOwnMessage ? '/assets/img/png/avatarClient.png' : `https://ui-avatars.com/api/?name=${data.sender}`}" 
+            alt="${isOwnMessage ? 'You' : data.sender}" 
+            class="w-8 h-8 rounded-full mt-1"
+          />
+          <div class="${
+            isOwnMessage ? "bg-customBlack text-white" : "bg-gray-100"
+          } rounded-lg p-3 max-w-[80%]">
+            <div class="font-medium mb-1">${data.sender}</div>
+            <p>${data.text}</p>
+            <div class="text-xs ${
+              isOwnMessage ? "opacity-75" : "text-gray-500"
+            } mt-1">${data.timestamp.split(' ')[1].slice(0,5)}</div>
+          </div>
+        `;
+        messagesList.appendChild(li);
+        messagesList.scrollTop = messagesList.scrollHeight;
+      });
+
+      messageForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const message = messageInput.value;
+        socket.emit("send_message", { chat_id: chatId, message });
+        messageInput.value = "";
+      });
+
+      function leaveChat(event) {
+        socket.emit("leave_chat", { chat_id: chatId });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% for user in recipient %}
+    {% if user.chat_id == chat_id %}
+    <title>Chat with {{ user.name }}</title>
+    {% endif %}
+    {% endfor %}
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+</head>
+<body>
+    {% for user in recipient %}
+    {% if user.chat_id == chat_id %}
+    <h1>Chat with {{ user.name }}</h1>
+    {% endif %}
+    {% endfor %}
+    <a href="/chat" onclick="leaveChat(event);">Back to Chats</a>
+    <script>
+        function leaveChat(event){
+            socket.emit('leave_chat', { chat_id: chatId })
+        };
+    </script>
+    <!-- Список сообщений -->
+    <ul id="messages">
+        {% for message in messages %}
+        <li><strong>{{ message.name }}:</strong> {{ message.message }}<br>
+            {{ message.timestamp }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Форма отправки сообщения -->
+    <form id="messageForm">
+        <input type="text" id="messageInput" placeholder="Type a message" required>
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        const socket = io();  // Инициализация Socket.IO
+        const chatId = "{{ chat_id }}";
+        const username = "{{ username }}";
+
+        const messagesList = document.getElementById('messages');
+        const messageForm = document.getElementById('messageForm');
+        const messageInput = document.getElementById('messageInput');
+
+        // Присоединяемся к комнате чата
+        socket.emit('join_chat', { chat_id: chatId });
+
+        // Обновляем сообщения при получении нового сообщения
+        socket.on('receive_message', (data) => {
+            console.log('Сообщение')
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${data.sender}:</strong> ${data.text}<br>${data.timestamp}`;
+            messagesList.appendChild(li);
+        });
+
+        // Обработчик отправки формы
+        messageForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const message = messageInput.value;
+            socket.emit('send_message', { chat_id: chatId, message });
+            messageInput.value = '';  // Очищаем поле ввода
+        });
+
+        // Уведомления о статусе (например, кто-то присоединился/вышел)
+        socket.on('status', (data) => {
+            const li = document.createElement('li');
+            li.style.color = 'gray';
+            li.textContent = data.msg;
+            messagesList.appendChild(li);
+        });
+
+        // Покидаем комнату при выходе со страницы
+        window.addEventListener('beforeunload', (event) => {
+            console.log('Выход')
+            socket.emit('leave_chat', { chat_id: chatId });
+        });
+    </script>
+</body>
+</html>

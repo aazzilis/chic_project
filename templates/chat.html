@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>Welcome, {{ username }}</h1>
+    <a href="/logout">Logout</a>
+    <h2>Chats</h2>
+    <ul>
+        {% if chats != None %}
+        {% for chat in chats %}
+        {% for cht in chat %}
+        {% if cht.name != username %}
+        <li><a href="{{ url_for('chat_with_user', chat_id=cht['chat_id'],recipient_id=cht['user_id']) }}">
+           <strong> Chat with {{ cht.name }} </strong>
+            || <span id="#unreaded_{{ cht.chat_id }}">Unreaded number: {{ unreaded.unreaded }}</span>
+        </a></li>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        {% endif %}
+    </ul>
+    <h2>Available Users</h2>
+    <ul>
+        {% for user in users %}
+        {% if user['email'] != email %}
+        <li><a href="{{ url_for('create_chat_with_user', user_id=user['user_id']) }}">
+            Chat with {{ user['name'] }}</a></li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    <script>
+        const socket = io();
+        
+        socket.on('update_unreaded', (data) => {
+            const unreadedElement = document.getElementById(`#unreaded_${ data.unreaded.chat_id }`); 
+            unreadedElement.innerHTML = `Unreaded number: ${ data.unreaded.unreaded }`;
+        });
+    </script>
+</body>
+</html>

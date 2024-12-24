@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/customStyles.css') }}">
+      <title>Личный кабинет - Клиент</title>
+   </head>
+   <body class="bg-customGray font-sans">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between p-3 bg-customWhite shadow-md">
+      <!-- Logo and Orders Button Container -->
+      <div class="flex items-center gap-6 ml-20">
+        <a href="{{ url_for('start_page') }}">
+          <img src="{{ url_for('static', filename='assets/img/svg/logoHead.svg') }}" alt="">
+        </a>
+        <button class="oswald-weight-medium bg-black text-white px-6 py-2 rounded-full hover:bg-customGreen hover:text-black border-2 border-transparent hover:border-black transition-colors flex items-center gap-2 group" onclick="openOrdersModal()">
+          <img src="{{ url_for('static', filename='assets/img/svg/myOrders.svg') }}" alt="" class="group-hover:invert">
+          Мои заказы
+        </button>
+      </div>
+  
+      <!-- Menu Icon -->
+      <div class="text-3xl cursor-pointer mr-10" onclick="toggleMenu()">
+        <img src="{{ url_for('static', filename='assets/img/svg/burger-menu.svg') }}" alt="">
+      </div>
+      
+    </header>
+  
+<!-- Main Content -->
+<main class="container mx-auto mt-10 px-4">
+    <div class="grid grid-cols-1 gap-8">
+  
+      <!-- Объединенный блок профиля -->
+      <div class="bg-white p-6 rounded-t-lg shadow-lg">
+
+        <div class="flex gap-8">
+  
+          <!-- Profile Info + Parameters -->
+          <div class="flex flex-col bg-customWhite border-2 border-customBlack p-4 rounded-lg flex-1">
+            
+            <!-- Profile Info -->
+            <div class="flex items-center gap-6 mb-6">
+              <!-- Фото профиля -->
+              <img src="{{ url_for('static', filename='assets/img/png/avatarStilist.png') }}" alt="Фото профиля" class="w-32 h-32 rounded-full border-2 border-customBlack">
+  
+              <!-- Имя, Фамилия и Возраст -->
+              <div>
+
+                <div>
+                  <!-- <img src="{{ url_for('static', filename='assets/img/png/level-7.png') }}" alt="" class="w-10 h-10 rounded-full border-2 border-customBlack p-1"> -->
+                  <p class="text-xl oswald-weight-medium">
+                    {% if user_info.level == 0 %}
+                    Junior
+                    {% elif user_info.level == 1 %}
+                    Middle
+                    {% elif user_info.level == 2 %}
+                    Senior
+                    {% endif %}
+                  </p>
+                </div>
+
+                <h2 class="text-2xl oswald-weight-medium">{{user_info.first_name}}</h2>
+                <p class="text-2xl oswald-weight-medium">{{user_info.last_name}}</p>
+                <!-- Рейтинг и звездочки в одной строке -->
+                <div class="flex items-center gap-2">
+                  <p class="text-xl oswald-weight-medium">{{average_score}}</p>
+                  <div class="flex gap-1">
+                    <ul class="flex space-x-1">
+                      {% for i in range(average_score|round|int) %}
+                      <li><img src="{{ url_for('static', filename='assets/img/svg/star.svg') }}" alt="★" class="w-4 h-4"></li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Отзывы -->
+            <div class="mt-4">
+              <h3 class="text-xl oswald-weight-medium mb-4">Отзывы клиентов</h3>
+              <div class="relative">
+                <!-- Контейнер для отзывов -->
+                <div id="reviewsContainer" class="overflow-hidden">
+
+                  <div id="reviewsSlider" class="flex transition-transform duration-300">
+                    {% if feedbacks %}
+                      {% for feedback in feedbacks %}
+                      <div class="border-2 border-customGreen rounded-lg px-10 py-4 w-full flex-shrink-0">
+                        <div class="flex items-center gap-3 mb-2">
+                          <img src="{{ url_for('static', filename='assets/img/png/avatarClient.png') }}" alt="Фото клиента" class="w-10 h-10 rounded-full">
+                          <div>
+                            <p class="font-medium">{{feedback.first_name}} {{feedback.last_name}}</p>
+                            <div class="flex gap-1">
+                              <ul class="flex space-x-1">
+                                {% for i in range(feedback.score) %}
+                                <li><img src="{{ url_for('static', filename='assets/img/svg/star.svg') }}" alt="★" class="w-4 h-4"></li>
+                                {% endfor %}
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <p class="text-customBlack">{{feedback.text}}</p>
+                      </div>
+                      {% endfor %}
+                    {% else %}
+                      <div class="border-2 border-customGreen rounded-lg px-10 py-4 w-full flex-shrink-0">
+                        <p class="text-center text-gray-500">Пока нет отзывов</p>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+
+                <!-- Кнопки навигации -->
+                <button onclick="prevSlide()" class="absolute left-0 top-1/2 transform -translate-y-1/2 text-white p-2 rounded-r">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                </button>
+                <button onclick="nextSlide()" class="absolute right-0 top-1/2 transform -translate-y-1/2 text-white p-2 rounded-l">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                </button>
+              </div>
+            </div>
+            
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-col flex-1 border-2 border-customBlack rounded-lg p-4">
+
+            <h2 class="text-2xl font-bold mb-6 oswald-weight-medium">Выберите действие:</h2>
+
+            <div class="space-y-4">
+              <a href="/chats"><button class="w-full oswald-weight-medium bg-black text-white py-3 rounded-full hover:bg-customGreen hover:text-black border-2 border-transparent hover:border-black transition-colors">Чат с клиентом</button></a>
+              <button class="w-full oswald-weight-medium bg-black text-white py-3 rounded-full hover:bg-customGreen hover:text-black border-2 border-transparent hover:border-black transition-colors" onclick="openVideoModal()">Видеозвонок клиенту</button>
+              <button onclick="window.location.href='{{ url_for('download_resume', user_id=user_info.user_id) }}'" class="w-full oswald-weight-medium bg-black text-white py-3 rounded-full hover:bg-customGreen hover:text-black border-2 border-transparent hover:border-black transition-colors">Просмотреть резюме</button>
+              <input type="file" id="resumeUpload" style="display: none" accept=".pdf,.doc,.docx">
+              <button onclick="document.getElementById('resumeUpload').click()" class="w-full oswald-weight-medium bg-black text-white py-3 rounded-full hover:bg-customGreen hover:text-black border-2 border-transparent hover:border-black transition-colors">Именить резюме</button>
+              </div>
+            
+          </div>
+  
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+<!-- Зеленая линия -->
+<div class="container mx-auto px-4">
+  <div class="w-full h-3 bg-customGreen mt-0"></div>
+  <div class="w-full h-6 bg-customBlack mt-0 rounded-b-lg"></div>
+</div>
+  
+  <!-- Модальное окно для видеозвонка -->
+  <dialog id="videoModal" class="fixed inset-0 w-full h-full bg-customBlack rounded-xl p-0 overflow-hidden">
+    <!-- Зеленая полоска -->
+    <div class="w-full h-6 bg-customGreen">
+      <button class="absolute right-4 top-2" onclick="closeVideoModal()">
+        <img src="{{ url_for('static', filename='assets/img/svg/close-modal.svg') }}" alt="">
+      </button>
+    </div>
+
+    <div class="w-full h-full flex flex-col items-center justify-center">
+        <!-- Аватар и имя -->
+        <div class="flex flex-col items-center mb-8">
+            <img src="{{ url_for('static', filename='assets/img/png/avatarStilist.png') }}" alt="Фото профиля" class="w-auto h-auto rounded-full mb-4">
+            <h3 class="text-white text-2xl">Екатерина</h3>
+        </div>
+        
+        <!-- Кнопки управления -->
+        <div class="flex gap-8">
+
+            <button class="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center hover:bg-gray-700">
+              <img src="{{ url_for('static', filename='assets/img/svg/camera.svg') }}" class="w-auto h-auto" alt="">
+            </button>
+
+            <button onclick="closeVideoModal()" class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700">
+              <img src="{{ url_for('static', filename='assets/img/svg/end-call.svg') }}" class="w-auto h-auto" alt="">
+            </button>
+
+            <button class="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center hover:bg-gray-700">
+              <img src="{{ url_for('static', filename='assets/img/svg/mic.svg') }}" class="w-auto h-auto" alt="">
+            </button>
+
+        </div>
+    </div>
+  </dialog>
+  
+  <script>
+    function openVideoModal() {
+        document.getElementById('videoModal').showModal();
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+        document.getElementById('videoModal').close();
+        document.body.style.overflow = 'auto';
+    }
+
+    let currentSlide = 0;
+    const slider = document.getElementById('reviewsSlider');
+    const slides = slider.children;
+    
+    function showSlide(index) {
+      currentSlide = index;
+      const offset = -currentSlide * 100;
+      slider.style.transform = `translateX(${offset}%)`;
+    }
+    
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+    
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    function toggleMenu() {
+        const menu = document.getElementById('sideMenu');
+        const isOpen = menu.classList.contains('translate-x-0');
+        
+        if (isOpen) {
+            menu.classList.remove('translate-x-0');
+            menu.classList.add('translate-x-full');
+            document.body.style.overflow = 'auto';
+        } else {
+            menu.classList.remove('translate-x-full');
+            menu.classList.add('translate-x-0');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function openOrdersModal() {
+        document.getElementById('ordersModal').showModal();
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeOrdersModal() {
+        document.getElementById('ordersModal').close();
+        document.body.style.overflow = 'auto';
+    }
+
+    function switchTab(tabName) {
+      // Скрыть все вкладки
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.add('hidden');
+      });
+      
+      // Убрать активный класс со всех кнопок
+      document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+      });
+      
+      // Показать выбранную вкладку
+      document.getElementById(tabName + 'Tab').classList.remove('hidden');
+      
+      // Добавить активный класс к нажатой кнопке
+      document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+    }
+  </script>
+
+   <!-- Модальное окно для заказов -->
+   <dialog id="ordersModal" class="fixed border-2 border-customBlack inset-0 w-full h-full bg-customWhite rounded-xl overflow-hidden">
+    <!-- Зеленая полоска -->
+    <div class="w-full h-6 bg-customGreen relative">
+      <button class="absolute right-4 top-2" onclick="closeOrdersModal()">
+        <img src="{{ url_for('static', filename='assets/img/svg/close-modal.svg') }}" alt="">
+      </button>
+    </div>
+    <div class="p-6">
+    <!-- Вкладки -->
+    <div class="border-b border-customBlack">
+      <div class="flex gap-4">
+        <button onclick="switchTab('active')" class="px-6 py-2 oswald-weight-medium text-lg tab-button active" data-tab="active">
+          Активные
+        </button>
+        <button onclick="switchTab('clients')" class="px-6 py-2 oswald-weight-medium text-lg tab-button" data-tab="clients">
+          Клиенты
+        </button>
+      </div>
+    </div>
+
+<!-- Карточки доступных клиентов -->
+    <div id="clientsTab" class="tab-content hidden">
+      <div class="min-h-screen w-full mt-10">
+        <ul class="space-y-4">
+          {% for user in users %}
+          <li class="bg-white p-4 border-2 border-customBlack rounded-lg shadow-md flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <img src="{{ url_for('static', filename= 'assets/img/png/avatarClient.png') }}" alt="Avatar" class="w-32 h-32 rounded-full object-cover">
+              <div>
+                <h3 class="text-xl oswald-weight-medium">{{user.first_name}} {{user.last_name}}</h3>
+              </div>
+            </div>
+            <div class="flex flex-col space-y-2">
+              <a href="{{ url_for('create_chat_with_user', user_id=user['user_id']) }}" class="block border rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                <button class="bg-customBlack oswald-weight-medium text-white px-4 py-2 rounded-lg hover:bg-customGreen hover:text-black border-2 hover:border-customBlack border-transparent">
+                Выбрать
+              </button>
+              </a>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+<!-- Карточки активных заказов -->
+    <div id="activeTab" class="tab-content">
+      <div class="min-h-screen w-full mt-10">
+        <ul class="space-y-4">
+          {% for order in current_orders %}
+          <li class="bg-white p-4 border-2 border-customBlack rounded-lg shadow-md flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <img src="{{ url_for('static', filename= 'assets/img/png/avatarClient.png') }}" alt="Avatar" class="w-32 h-32 rounded-full object-cover">
+              <div>
+                <h3 class="text-xl oswald-weight-medium">{{order.first_name}} {{order.last_name}}</h3>
+              </div>
+            </div>
+            <div class="flex flex-col space-y-2">
+              <a href="{{ url_for('complete_order', order_id=order['order_id']) }}" class="block border rounded-lg p-4 hover:bg-gray-50 transition-colors">
+              <button class="bg-customBlack oswald-weight-medium text-white px-4 py-2 rounded-lg hover:bg-customGreen hover:text-black border-2 hover:border-customBlack border-transparent">
+                Завершить
+              </button>
+            </a>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+</div>
+
+    </div>
+  </dialog>
+  
+  <!-- Боковое меню -->
+  <div id="sideMenu" class="fixed top-0 right-0 h-full w-80 bg-customWhite transform translate-x-full transition-transform duration-300 ease-in-out shadow-lg z-50">
+    <!-- Кнопка закрытия -->
+    <button onclick="toggleMenu()" class="absolute top-6 right-6">
+      <img src="{{ url_for('static', filename='assets/img/svg/close-modal.svg') }}" alt="Закрыть" class="w-6 h-6">
+    </button>
+    
+    <!-- Содержимое меню -->
+    <div class="p-8 mt-16">
+      <nav class="space-y-4">
+        <a href="#" class="block oswald-weight-medium text-2xl hover:text-customGreen flex items-center gap-3">
+          <img src="{{ url_for('static', filename='assets/img/svg/profile.svg') }}" alt="" class="w-12 h-12">
+          Профиль
+        </a>
+        <!-- ... остальные пункты меню ... -->
+      </nav>
+    </div>
+  </div>
+  
+  
+  
+  </body>
+</html>

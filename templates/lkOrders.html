@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/customStyles.css') }}">
+      <title>Личный кабинет - Клиент</title>
+   </head>
+   <body class="bg-gradient-to-r from-gray-100 to-gray-200 min-h-screen">
+    
+    <!-- Header -->
+    <header class="flex items-center justify-between p-3 bg-customWhite shadow-md">
+        <div class="flex items-center gap-6 ml-20">
+          <a href="{{ url_for('start_page') }}">
+            <img src="{{ url_for('static', filename='assets/img/svg/logoHead.svg') }}" alt="">
+          </a>
+          <button class="oswald-weight-medium bg-black text-white px-6 py-2 rounded-full hover:bg-customGreen hover:text-black border-2 border-transparent hover:border-black transition-colors flex items-center gap-2 group">
+            <img src="{{ url_for('static', filename='assets/img/svg/myOrders.svg') }}" alt="" class="group-hover:invert">
+            Мои заказы
+          </button>
+        </div>
+        <div class="text-3xl cursor-pointer mr-10" onclick="toggleMenu()">
+          <img src="{{ url_for('static', filename='assets/img/svg/burger-menu.svg') }}" alt="">
+        </div>
+    </header>
+
+    <!-- Cards Container -->
+    <div class="max-w-5xl mx-auto mt-10 px-4">
+
+        <ul class="space-y-4">
+            <!-- Card 1 -->
+             {%for order in completed_orders%}
+            <li class="bg-white p-4 rounded-lg shadow-md flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <img src="{{ url_for('static', filename='assets/img/png/avatarStilist.png') }}" alt="Avatar" class="w-32 h-32 rounded-full object-cover">
+                    <div>
+                        <h3 class="text-xl oswald-weight-medium">{{order.first_name}}</h3>
+                    </div>
+                </div>
+                <div class="flex flex-col space-y-2">
+                  <!-- <a href="{{ url_for('create_chat_with_user', user_id=user['user_id']) }}"> -->
+                    <button class="bg-customBlack oswald-weight-medium text-white px-4 py-2 rounded-lg hover:bg-customWhite hover:text-black border-2 hover:border-customBlack border-transparent">Выбрать</button>
+                  <!-- </a> -->
+                </div>
+            </li>
+            {%endfor%}
+            
+        </ul>
+    </div>
+
+    <div id="sideMenu" class="fixed top-0 right-0 h-full w-80 bg-customWhite transform translate-x-full transition-transform duration-300 ease-in-out shadow-lg z-50">
+        <button onclick="toggleMenu()" class="absolute top-6 right-6">
+            <img src="{{ url_for('static', filename='assets/img/svg/close-modal.svg') }}" alt="Закрыть" class="w-6 h-6">
+        </button>
+        
+        <div class="p-8 mt-16">
+            <nav class="space-y-4">
+                {% if stylist %}
+                <a href="{{ url_for('lkST') }}" class="block oswald-weight-medium text-2xl hover:text-customGreen flex items-center gap-3">
+                    <img src="{{ url_for('static', filename='assets/img/svg/profile.svg') }}" alt="" class="w-12 h-12">
+                    Профиль
+                </a>
+                {% endif %}
+                {% if not stylist %}
+                <a href="{{ url_for('lkCL') }}" class="block oswald-weight-medium text-2xl hover:text-customGreen flex items-center gap-3">
+                    <img src="{{ url_for('static', filename='assets/img/svg/profile.svg') }}" alt="" class="w-12 h-12">
+                    Профиль
+                </a>
+                {% endif %}
+            </nav>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('sideMenu');
+            const isOpen = menu.classList.contains('translate-x-0');
+            
+            if (isOpen) {
+                menu.classList.remove('translate-x-0');
+                menu.classList.add('translate-x-full');
+                document.body.style.overflow = 'auto';
+            } else {
+                menu.classList.remove('translate-x-full');
+                menu.classList.add('translate-x-0');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        // ... другие функции для работы с видео и слайдером ...
+    </script>
+
+</body>
+</html>

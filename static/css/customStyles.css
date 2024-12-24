@@ -1,0 +1,203 @@
+@import url(/assets/fonts/PlayfairDisplay-Black.ttf);
+@import url(/assets/fonts/PlayfairDisplay-Bold.ttf);
+@import url(/assets/fonts/PlayfairDisplay-BoldItalic.ttf);
+@import url(/assets/fonts/PlayfairDisplay-ExtraBold.ttf);
+@import url(/assets/fonts/PlayfairDisplay-Medium.ttf);
+@import url(/assets/fonts/PlayfairDisplay-Regular.ttf);
+@import url(/assets/fonts/PlayfairDisplay-SemiBold.ttf);
+
+@import url(/assets/fonts/Oswald-ExtraLight.ttf);
+@import url(/assets/fonts/Oswald-Light.ttf);
+@import url(/assets/fonts/Oswald-Regular.ttf);
+@import url(../assets/fonts/Oswald-Medium.ttf);
+@import url(/assets/fonts/Oswald-SemiBold.ttf);
+@import url(/assets/fonts/Oswald-bold.ttf);
+@import url(/assets/fonts/Oswald-VariableFont_wght.ttf);
+
+@font-face {
+    font-family: oswald-f;
+    src: url(../static/assets/fonts/Oswald-ExtraLight.ttf);
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: oswald-f;
+    src: url(/assets/fonts/Oswald-Light.ttf);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: oswald-f;
+    src: url(/assets/fonts/Oswald-Regular.ttf);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: oswald-f;
+    src: url(../assets/fonts/Oswald-Medium.ttf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: oswald-f;
+    src: url(/assets/fonts/Oswald-SemiBold.ttf);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: oswald-f;
+    src: url(/assets/fonts/Oswald-Bold.ttf);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: oswald-f;
+    src: url(/assets/fonts/Oswald-VariableFont_wght.ttf);
+}
+
+/* Playfair */
+
+@font-face {
+    font-family: "Playfair Display", serif;
+    src: url(/assets/fonts/PlayfairDisplay-Regular.ttf);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Playfair Display", serif;
+    src: url(/assets/fonts/PlayfairDisplay-Medium.ttf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Playfair Display", serif;
+    src: url(/assets/fonts/PlayfairDisplay-SemiBold.ttf);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Playfair Display", serif;
+    src: url(/assets/fonts/PlayfairDisplay-Bold.ttf);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Playfair Display", serif;
+    src: url(/assets/fonts/PlayfairDisplay-ExtraBold.ttf);
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: "Playfair Display", serif;
+    src: url(/assets/fonts/PlayfairDisplay-Black.ttf);
+    font-weight: 900;
+}
+
+.oswald-weight-extralight {
+    font-family: 'oswald-f', sans-serif;
+    font-weight: 200;
+}
+
+.oswald-weight-light {
+    font-family: 'oswald-f', sans-serif;
+    font-weight: 300;
+}
+
+.oswald-weight-regular {
+    font-family: 'oswald-f', sans-serif;
+    font-weight: 400;
+}
+
+.oswald-weight-medium {
+    font-family: 'oswald-f', sans-serif;
+    font-weight: 500;
+}
+
+.oswald-weight-semibold {
+    font-family: 'oswald-f', sans-serif;
+    font-weight: 600;
+}
+
+.oswald-weight-bold {
+    font-family: 'oswald-f', sans-serif;
+    font-weight: 700;
+}
+
+/* Playfair style */
+
+.playfair-weight-regular {
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+}
+
+.playfair-weight-medium {
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+}
+
+.playfair-weight-semibold {
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+}
+
+.playfair-weight-bold {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+}
+
+.playfair-weight-extrabold {
+    font-family: "Playfair Display", serif;
+    font-weight: 800;
+}
+
+.playfair-weight-black {
+    font-family: "Playfair Display", serif;
+    font-weight: 900;
+}
+
+/* Hide the default checkbox */
+input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Custom checkbox container */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Style the label */
+label {
+    cursor: pointer;
+}
+
+/* Image for custom checkbox */
+.checkbox-image {
+    width: 40px;
+    height: 40px;
+    transition: opacity 0.2s;
+}
+
+.shadow-gradient::before {
+    width: 900px;
+    height: 350px;
+    content: '';
+    background-image: linear-gradient(70deg, #000000, #000000);
+    position: absolute;
+    z-index: -1;
+    border-radius: 20% 30% 80% 10%;
+    filter: blur(130px);
+    top: 50%;
+    left: 5%;
+    transform: translate(-10%, -50%);
+    transition: 1s;
+}
+
+.selected {
+    border-color: #6ED01C;
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/css/output.css">
+    <link rel="stylesheet" href="./static/css/customStyles.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="bg-customGray flex flex-col items-center justify-center h-screen">
+
+        <!-- Logo Section -->
+        <div class="w-full max-w-4xl flex justify-start items-start pb-5">
+            <img src="./static/assets/img/svg/logo.svg" alt="">
+        </div>
+
+        <!-- Wrapper for Container and Stripes -->
+        <div class="w-full max-w-4xl border border-customBlack">
+
+            <!-- Main Container -->
+            <div class="bg-white p-8 shadow-md">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <form class="space-y-2 grid grid-cols-1 md:grid-cols-2 gap-6" method="post">
+                        <!-- First Column -->
+                        <div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday1')">
+                                <input type="checkbox" id="everyday1" name="everyday1">
+                                <img src="./static/assets/img/svg/crystall.svg" alt="Unchecked" class="checkbox-image" id="img-everyday1">
+                                <label for="everyday1">На каждый день</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday2')">
+                                <input type="checkbox" id="everyday2" name="everyday2">
+                                <img src="./static/assets/img/svg/crystall.svg" alt="Unchecked" class="checkbox-image" id="img-everyday2">
+                                <label for="everyday2">Сделать гардероб женственнее</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday3')">
+                                <input type="checkbox" id="everyday3" name="everyday3">
+                                <img src="./static/assets/img/svg/crystall.svg" alt="Unchecked" class="checkbox-image" id="img-everyday3">
+                                <label for="everyday3">На работу и бизнес-встречи</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday4')">
+                                <input type="checkbox" id="everyday4" name="everyday4">
+                                <img src="./static/assets/img/svg/crystall.svg" alt="Unchecked" class="checkbox-image" id="img-everyday4">
+                                <label for="everyday4">Добавить больше верха</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday5')">
+                                <input type="checkbox" id="everyday5" name="everyday5">
+                                <img src="./static/assets/img/svg/crystall.svg" alt="Unchecked" class="checkbox-image" id="img-everyday5">
+                                <label for="everyday5">Хочется больше платьев</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday6')">
+                                <input type="checkbox" id="everyday6" name="everyday6">
+                                <img src="./static/assets/img/svg/crystall.svg" alt="Unchecked" class="checkbox-image" id="img-everyday6">
+                                <label for="everyday6">Собрать новый гардероб</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday7')">
+                                <input type="checkbox" id="everyday7" name="everyday7">
+                                <img src="./static/assets/img/svg/crystall.svg" alt="Unchecked" class="checkbox-image" id="img-everyday7">
+                                <label for="everyday7">Для встреч с друзьями</label>
+                            </div>
+                        </div>
+
+                        <!-- Second Column -->
+                        <div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('home1')">
+                                <input type="checkbox" id="home1" name="home1">
+                                <img src="./static/assets/img/svg/crystall.svg" alt="Unchecked" class="checkbox-image" id="img-home1">
+                                <label for="home1">Одежда для дома</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('home2')">
+                                <input type="checkbox" id="home2" name="home2">
+                                <img src="./static/assets/img/svg/crystall.svg" alt="Unchecked" class="checkbox-image" id="img-home2">
+                                <label for="home2">Вечерние образы</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('home3')">
+                                <input type="checkbox" id="home3" name="home3">
+                                <img src="./static/assets/img/svg/crystall.svg" alt="Unchecked" class="checkbox-image" id="img-home3">
+                                <label for="home3">Для путешествий, отпуска</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('home4')">
+                                <input type="checkbox" id="home4" name="home4">
+                                <img src="./static/assets/img/svg/crystall.svg" alt="Unchecked" class="checkbox-image" id="img-home4">
+                                <label for="home4">Добавить больше низа
+                                    (юбки, джинсы, шорты)</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('home5')">
+                                <input type="checkbox" id="home5" name="home5">
+                                <img src="./static/assets/img/svg/crystall.svg" alt="Unchecked" class="checkbox-image" id="img-home5">
+                                <label for="home5">Разнообразить гардероб</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('home6')">
+                                <input type="checkbox" id="home6" name="home6">
+                                <img src="./static/assets/img/svg/crystall.svg" alt="Unchecked" class="checkbox-image" id="img-home6">
+                                <label for="home6">Для прогулок с детьми</label>
+                            </div>
+                        </div>
+
+                        <div class="col-span-2 border-2 border-customBlack rounded-full py-1 px-2 flex items-center">
+                            <button type="submit" name="action" value="prev">
+                                <img src="./static/assets/img/png/prev.png" alt="">
+                            </button>
+                            
+                            <!-- Separator -->
+                            <div class="w-1 h-8 bg-customBlack mx-2"></div>
+                            
+                            <button type="submit" name="action" value="next">
+                                <img src="./static/assets/img/png/next.png" alt="">
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Green and Black Stripes -->
+            <div class="w-full h-4 bg-customGreen"></div>
+            <div class="w-full h-8 bg-customBlack"></div>
+        </div>
+
+        <div class="absolute right-28 top-72">
+            <img src="./static/assets/img/png/janna-full.png" alt="">
+        </div>
+
+    </div>
+
+    <script>
+        function toggleCheckbox(id) {
+    const checkbox = document.getElementById(id);
+    const img = document.getElementById(`img-${id}`);
+    checkbox.checked = !checkbox.checked;
+    img.src = checkbox.checked ? './static/assets/img/svg/crystallActive.svg' : './static/assets/img/svg/crystall.svg';
+}
+    </script>
+
+</body>
+</html>

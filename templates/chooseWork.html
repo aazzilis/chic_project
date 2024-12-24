@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/customStyles.css') }}">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="bg-customGray flex flex-col items-center justify-center h-screen">
+
+        <!-- Logo Section -->
+        <div class="w-full max-w-4xl flex justify-start items-start pb-5">
+            <img src="{{ url_for('static', filename='assets/img/svg/logo.svg') }}" alt="">
+        </div>
+
+        <!-- Wrapper for Container and Stripes -->
+        <div class="w-full max-w-4xl border border-customBlack">
+
+            <!-- Main Container -->
+            <div class="bg-customWhite p-8 shadow-md">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- First Column -->
+                        <div class="space-y-2">
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday1')">
+                                <input type="checkbox" id="everyday1" name="professions" value="Маркетолог">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-everyday1">
+                                <label for="everyday1">Маркетолог</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday2')">
+                                <input type="checkbox" id="everyday2" name="professions" value="Менеджер">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-everyday2">
+                                <label for="everyday2">Менеджер</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday3')">
+                                <input type="checkbox" id="everyday3" name="professions" value="Финансист">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-everyday3">
+                                <label for="everyday3">Финансист</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday4')">
+                                <input type="checkbox" id="everyday4" name="professions" value="Медиа и коммуникации">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-everyday4">
+                                <label for="everyday4">Медиа и коммуникации</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday5')">
+                                <input type="checkbox" id="everyday5" name="professions" value="Искусство / творчество">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-everyday5">
+                                <label for="everyday5">Искусство / творчество</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday6')">
+                                <input type="checkbox" id="everyday6" name="professions" value="Юрист">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-everyday6">
+                                <label for="everyday6">Юрист</label>
+                            </div>
+                        </div>
+
+                        <!-- Second Column -->
+                        <div class="space-y-2">
+                            <div class="checkbox-container" onclick="toggleCheckbox('home1')">
+                                <input type="checkbox" id="home1" name="professions" value="Инженер">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-home1">
+                                <label for="home1">Инженер</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('home2')">
+                                <input type="checkbox" id="home2" name="professions" value="Студент">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-home2">
+                                <label for="home2">Студент</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('home3')">
+                                <input type="checkbox" id="home3" name="professions" value="Дизайнер">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-home3">
+                                <label for="home3">Дизайнер</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('home4')">
+                                <input type="checkbox" id="home4" name="professions" value="IT">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-home4">
+                                <label for="home4">IT</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('home5')">
+                                <input type="checkbox" id="home5" name="professions" value="Врач / Медицинский сотрудник">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-home5">
+                                <label for="home5">Врач / Медицинский сотрудник</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('home6')">
+                                <input type="checkbox" id="home6" name="professions" value="Ресторанный бизнес">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-home6">
+                                <label for="home6">Ресторанный бизнес</label>
+                            </div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('home7')">
+                                <input type="checkbox" id="home7" name="professions" value="Личный помощник">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-home7">
+                                <label for="home7">Личный помощник</label>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="flex justify-end mt-6 md:col-span-2">
+                            <div class="border-2 border-customBlack rounded-full py-1 px-2 flex items-center">
+                                <button type="submit" name="action" value="prev">
+                                    <img src="{{ url_for('static', filename='assets/img/png/prev.png') }}" alt="Previous">
+                                </button>
+                                
+                                <div class="w-1 h-8 bg-customBlack mx-2"></div>
+                                
+                                <button type="submit" name="action" value="next">
+                                    <img src="{{ url_for('static', filename='assets/img/png/next.png') }}" alt="Next">
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Green and Black Stripes -->
+            <div class="w-full h-4 bg-customGreen"></div>
+            <div class="w-full h-8 bg-customBlack"></div>
+        </div>
+
+        <div class="absolute right-28 top-72">
+            <img src="{{ url_for('static', filename='assets/img/png/edick-full.png') }}" alt="">
+        </div>
+
+    </div>
+
+    <script>
+        function toggleCheckbox(id) {
+    const checkbox = document.getElementById(id);
+    const img = document.getElementById(`img-${id}`);
+    checkbox.checked = !checkbox.checked;
+    img.src = checkbox.checked 
+        ? "{{ url_for('static', filename='assets/img/svg/crystallActive.svg') }}"
+        : "{{ url_for('static', filename='assets/img/svg/crystall.svg') }}";
+}
+    </script>
+
+</body>
+</html>

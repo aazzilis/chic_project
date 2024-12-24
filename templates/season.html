@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/css/output.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/css/customStyles.css') }}"
+    />
+    <title>Выбор стиля</title>
+</head>
+<body class="bg-gray-200">
+    <!-- Main Content -->
+    <main class="flex flex-col items-center justify-center h-screen">
+        <!-- Wrapper for Logo, Container, and Stripes -->
+        <div class="w-full max-w-4xl">
+            <!-- Logo Section -->
+            <div class="flex justify-start items-start pb-5">
+                <img src="{{ url_for('static', filename= 'assets/img/svg/logo.svg') }}" alt="Логотип">
+            </div>
+
+            <!-- Question Section -->
+            <div class="bg-customWhite p-8 shadow-md">
+                <form method="POST">
+                    <div class="space-y-6">
+                        <!-- Option 1: Лето -->
+                        <label class="block">
+                            <input type="radio" name="season" value="summer" class="hidden peer">
+                            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer peer-checked:bg-customGreen peer-checked:text-white">
+                                <h3 class="text-xl font-semibold text-gray-700 peer-checked:text-white">Лето</h3>
+                            </div>
+                        </label>
+
+                        <!-- Option 2: Зима -->
+                        <label class="block">
+                            <input type="radio" name="season" value="winter" class="hidden peer">
+                            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer peer-checked:bg-customGreen peer-checked:text-white">
+                                <h3 class="text-xl font-semibold text-gray-700 peer-checked:text-white">Зима</h3>
+                            </div>
+                        </label>
+
+                        <!-- Option 3: Осень -->
+                        <label class="block">
+                            <input type="radio" name="season" value="autumn" class="hidden peer">
+                            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer peer-checked:bg-customGreen peer-checked:text-white">
+                                <h3 class="text-xl font-semibold text-gray-700 peer-checked:text-white">Осень</h3>
+                            </div>
+                        </label>
+
+                        <!-- Option 4: Весна -->
+                        <label class="block">
+                            <input type="radio" name="season" value="spring" class="hidden peer">
+                            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer peer-checked:bg-customGreen peer-checked:text-white">
+                                <h3 class="text-xl font-semibold text-gray-700 peer-checked:text-white">Весна</h3>
+                            </div>
+                        </label>
+
+                        <!-- Option 5: Демисезон -->
+                        <label class="block">
+                            <input type="radio" name="season" value="demiseason" class="hidden peer">
+                            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer peer-checked:bg-customGreen peer-checked:text-white">
+                                <h3 class="text-xl font-semibold text-gray-700 peer-checked:text-white">Демисезон</h3>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="flex justify-end mt-10">
+                        <div class="border-2 border-customBlack rounded-full py-1 px-2 flex items-center">
+                            <button type="submit" name="action" value="prev">
+                                <img src="{{ url_for('static', filename= 'assets/img/png/prev.png') }}" alt="">
+                            </button>
+                            
+                            <!-- Separator -->
+                            <div class="w-1 h-8 bg-customBlack mx-2"></div>
+                            
+                            <button type="submit" name="action" value="next">
+                                <img src="{{ url_for('static', filename= 'assets/img/png/next.png') }}" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Green and Black Stripes -->
+            <div class="w-full h-4 bg-customGreen"></div>
+            <div class="w-full h-8 bg-customBlack"></div>
+
+            <div class="absolute right-28 top-72">
+                <img src="{{ url_for('static', filename= 'assets/img/png/janna-full.png') }}" alt="">
+            </div>
+        </div>
+    </main>
+</body>
+</html>

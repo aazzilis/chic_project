@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/customStyles.css') }}">
+        <title>Document</title>
+</head>
+<body class="bg-gray-200">
+        <!-- Main Content -->
+        <main class="flex items-center justify-center h-screen">
+            <!-- Wrapper for Container and Stripes -->
+            <div class="w-full max-w-4xl">
+
+                <div class="w-full max-w-4xl flex justify-start items-start pb-5">
+                    <img src="{{ url_for('static', filename='assets/img/svg/logo.svg') }}" alt="">
+                </div>
+                <!-- Card Selection Section -->
+                <div class="bg-customWhite p-8 shadow-md relative">
+            
+                    <div class="flex flex-col items-center mt-6">
+                        <form method="POST">
+                            <!-- Скрытое поле для хранения множественного выбора -->
+                            <input type="hidden" name="selectedLength" id="selectedLength">
+                            
+                            <div class="flex justify-center gap-10 mt-5">
+                                <!-- Card 1 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="w-auto h-auto border-2 border-customBlack cursor-pointer" onclick="toggleSquare(this, 'short')" data-length-type="short">
+                                        <img src="{{ url_for('static', filename='assets/img/png/lenght1.png') }}" alt="Jeans 1" class="w-full h-full object-cover">
+                                    </div>
+                                    <span class="mt-2 text-sm text-center">Укороченные</span>
+                                </div>
+                    
+                                <!-- Card 2 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="w-auto h-auto border-2 border-customBlack cursor-pointer" onclick="toggleSquare(this, 'standard')" data-length-type="standard">
+                                        <img src="{{ url_for('static', filename='assets/img/png/lenght2.png') }}" alt="Jeans 2" class="w-full h-full object-cover">
+                                    </div>
+                                    <span class="mt-2 text-sm text-center">Стандартные</span>
+                                </div>
+                    
+                                <!-- Card 3 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="w-auto h-auto border-2 border-customBlack cursor-pointer" onclick="toggleSquare(this, 'long')" data-length-type="long">
+                                        <img src="{{ url_for('static', filename='assets/img/png/lenght3.png') }}" alt="Jeans 3" class="w-full h-full object-cover">
+                                    </div>
+                                    <span class="mt-2 text-sm text-center">Длинные</span>
+                                </div>
+                            </div>
+
+                            <!-- Moved navigation buttons inside form -->
+                            <div class="flex justify-end mt-6">
+                                <div class="border-2 border-customBlack rounded-full py-1 px-2 flex items-center">
+                                    <button type="submit" name="action" value="prev">
+                                        <img src="{{ url_for('static', filename='assets/img/png/prev.png') }}" alt="Previous">
+                                    </button>
+                                    
+                                    <!-- Separator -->
+                                    <div class="w-1 h-8 bg-customBlack mx-2"></div>
+                                    
+                                    <button type="submit" name="action" value="next">
+                                        <img src="{{ url_for('static', filename='assets/img/png/next.png') }}" alt="Next">
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    
+            
+                </div>
+
+                <div class="absolute right-28 top-72">
+
+                    <div class="rounded-xl bg-customWhite text-center border border-customBlack text-xl px-8 py-4">
+                        <p>Какая цветовая гамма вам ближе?</p>
+                    </div>
+
+                    <img src="{{ url_for('static', filename='assets/img/png/janna-skin10.png') }}" alt="">
+                </div>
+
+                <!-- Green and Black Stripes -->
+                <div class="w-full h-4 bg-customGreen"></div>
+                <div class="w-full h-8 bg-customBlack"></div>
+            </div>
+        </main>
+
+        <script>
+            function toggleCheckboxImage(clickedId, otherId) {
+                const clickedImage = document.getElementById(clickedId);
+                const otherImage = document.getElementById(otherId);
+    
+                // Toggle the clicked image
+                clickedImage.src = clickedImage.src.includes('likeWhite.svg') ? './static/assets/img/svg/likeRed.svg' : './static/assets/img/svg/likeWhite.svg';
+    
+                // Change the state of the other image
+                otherImage.src = otherImage.src.includes('likeWhite.svg') ? './static/assets/img/svg/likeRed.svg' : './static/assets/img/svg/likeWhite.svg';
+            }
+        </script>
+
+<script>
+    let selectedTypes = new Set();
+
+    function toggleSquare(element, lengthType) {
+        // Переключаем класс selected для визуальной индикации
+        element.classList.toggle('selected');
+        
+        // Добавляем или удаляем тип из набора выбранных
+        if (element.classList.contains('selected')) {
+            selectedTypes.add(lengthType);
+        } else {
+            selectedTypes.delete(lengthType);
+        }
+        
+        // Обновляем скрытое поле формы
+        document.getElementById('selectedLength').value = Array.from(selectedTypes).join(',');
+    }
+
+    // Добавляем стили для выбранных элементов
+    document.head.insertAdjacentHTML('beforeend', `
+        <style>
+            .selected {
+                background-color: #e5e5e5;
+                border-color: #000 !important;
+                border-width: 3px !important;
+            }
+        </style>
+    `);
+</script>
+
+</body>
+</html>

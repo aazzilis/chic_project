@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/customStyles.css') }}">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="bg-customGray flex flex-col items-center justify-center h-screen">
+
+        <!-- Logo Section -->
+        <div class="w-full max-w-4xl flex justify-start items-start pb-5">
+            <img src="{{ url_for('static', filename='assets/img/svg/logo.svg') }}" alt="">
+        </div>
+
+        <!-- Wrapper for Container and Stripes -->
+        <div class="w-full max-w-4xl border border-customBlack">
+
+            <!-- Main Container -->
+            <div class="bg-customWhite p-8 shadow-md">
+                <form method="post" class="space-y-2">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- First Column with Custom Checkboxes -->
+                        <div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('size_XXS')">
+                                <input type="checkbox" name="size" id="size_XXS" value="XXS">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-size_XXS">
+                                <label for="size_XXS">XXS</label>
+                            </div>
+                            
+                            <div class="checkbox-container" onclick="toggleCheckbox('size_XS')">
+                                <input type="checkbox" name="size" id="size_XS" value="XS">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-size_XS">
+                                <label for="size_XS">XS</label>
+                            </div>
+                            
+                            <div class="checkbox-container" onclick="toggleCheckbox('size_S')">
+                                <input type="checkbox" name="size" id="size_S" value="S">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-size_S">
+                                <label for="size_S">S</label>
+                            </div>
+                            
+                            <div class="checkbox-container" onclick="toggleCheckbox('size_M')">
+                                <input type="checkbox" name="size" id="size_M" value="M">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-size_M">
+                                <label for="size_M">M</label>
+                            </div>
+
+                        </div>
+
+                        <!-- Second Column with Custom Checkboxes -->
+                        <div>
+                            <div class="checkbox-container" onclick="toggleCheckbox('size_L')">
+                                <input type="checkbox" name="size" id="size_L" value="L">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-size_L">
+                                <label for="size_L">L</label>
+                            </div>
+                            
+                            <div class="checkbox-container" onclick="toggleCheckbox('size_XL')">
+                                <input type="checkbox" name="size" id="size_XL" value="XL">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-size_XL">
+                                <label for="size_XL">XL</label>
+                            </div>
+                            
+                            <div class="checkbox-container" onclick="toggleCheckbox('size_XXL')">
+                                <input type="checkbox" name="size" id="size_XXL" value="XXL">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-size_XXL">
+                                <label for="size_XXL">XXL</label>
+                            </div>
+                            
+                            <div class="checkbox-container" onclick="toggleCheckbox('size_3XL')">
+                                <input type="checkbox" name="size" id="size_3XL" value="3XL">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-size_3XL">
+                                <label for="size_3XL">3XL</label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Перемещаем кнопки внутрь формы -->
+                    <div class="flex justify-end mt-6">
+                        <div class="border-2 border-customBlack rounded-full py-1 px-2 flex items-center">
+                            <button type="submit" name="action" value="previous">
+                                <img src="{{ url_for('static', filename='assets/img/png/prev.png') }}" alt="Previous">
+                            </button>
+                            
+                            <!-- Separator -->
+                            <div class="w-1 h-8 bg-customBlack mx-2"></div>
+                            
+                            <button type="submit" name="action" value="next">
+                                <img src="{{ url_for('static', filename='assets/img/png/next.png') }}" alt="Next">
+                            </button>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+
+            <!-- Green and Black Stripes -->
+            <div class="w-full h-4 bg-customGreen"></div>
+            <div class="w-full h-8 bg-customBlack"></div>
+        </div>
+
+        <div class="absolute right-28 top-72">
+            <img src="{{ url_for('static', filename='assets/img/png/edick-full.png') }}" alt="">
+        </div>
+
+    </div>
+
+    <script>
+        function toggleCheckbox(id) {
+            // Сначала снимаем выделение со всех чекбоксов
+            document.querySelectorAll('input[name="size"]').forEach(cb => {
+                cb.checked = false;
+                document.getElementById(`img-${cb.id}`).src = '/assets/img/svg/crystall.svg';
+            });
+            
+            // Затем устанавливаем выбранный чекбокс
+            const checkbox = document.getElementById(id);
+            const img = document.getElementById(`img-${id}`);
+            checkbox.checked = true;
+            img.src = '/assets/img/svg/crystallActive.svg';
+        }
+    </script>
+
+</body>
+</html>

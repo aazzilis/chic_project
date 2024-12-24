@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/customStyles.css') }}">
+      <title>Личный кабинет - Клиент</title>
+   </head>
+   <body class="bg-customGray font-sans">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between p-3 bg-customWhite shadow-md">
+      <!-- Logo -->
+      <div class="flex items-center gap-6 ml-20">
+        <a href="{{ url_for('start_page') }}">
+          <img src="{{ url_for('static', filename='assets/img/svg/logoHead.svg') }}" alt="">
+        </a>
+        <!-- <a href="{{ url_for('lkOrders') }}"> -->
+        <button 
+          class="oswald-weight-medium bg-black text-white px-6 py-2 rounded-full hover:bg-customGreen hover:text-black border-2 border-transparent hover:border-black transition-colors flex items-center gap-2 group"
+          onclick="document.getElementById('orderHistoryModal').showModal()"
+        >
+          <img src="{{ url_for('static', filename='assets/img/svg/history.svg') }}" alt="" class="group-hover:invert">
+          История заказов
+        </button>
+      <!-- </a> -->
+      </div>
+  
+      <!-- Menu Icon -->
+      <div class="text-3xl cursor-pointer mr-10">
+        <img src="{{ url_for('static', filename='assets/img/svg/burger-menu.svg') }}" alt="">
+      </div>
+      
+    </header>
+  
+<!-- Main Content -->
+<main class="container mx-auto mt-10 px-4">
+    <div class="grid grid-cols-1 gap-8">
+  
+      <!-- Объединенный блок профиля -->
+      <div class="bg-white p-6 rounded-t-lg shadow-lg">
+
+        <div class="flex gap-8">
+  
+          <!-- Profile Info + Parameters -->
+          <div class="flex flex-col bg-customWhite border-2 border-customBlack p-4 rounded-lg flex-1">
+            
+            <!-- Profile Info -->
+  <div class="flex items-center gap-6 mb-6">
+    <!-- Фото профиля -->
+    <img src="{{ url_for('static', filename='assets/img/png/avatarClient.png') }}" alt="Фото профиля" class="w-32 h-32 rounded-full">
+
+    <!-- Имя, Фамилия и Возраст -->
+    <div>
+      <h2 class="text-2xl oswald-weight-medium">{{user_info.last_name}}</h2>
+      <p class="text-2xl oswald-weight-medium">{{user_info.first_name}}</p>
+      <p class="text-customBlack text-xl oswald-weight-medium">{{ user_years }} лет</p>
+    </div>
+  </div>
+
+  <!-- Parameters -->
+  {%for p in params%}
+<div class="bg-white p-4 rounded-lg w-full oswald-weight-medium">
+  <h3 class="mb-3 text-2xl">Параметры</h3>
+  <div class="space-y-2">
+    <div class="flex justify-between text-xl">
+      <span>Рост</span>
+      <span>{{ p.height }}</span>
+    </div>
+    <div class="flex justify-between text-xl">
+      <span>Объем талии</span>
+      <span>{{ p.waist_size }}</span>
+    </div>
+    <div class="flex justify-between text-xl">
+      <span>Объем груди</span>
+      <span>{{ p.chest_size }}</span>
+    </div>
+    <div class="flex justify-between text-xl">
+      <span>Размер одежды</span>
+      <span>{{ p.clothes_size }}</span>
+    </div>
+    <div class="flex justify-between text-xl">
+      <span>Объем бедер</span>
+      <span>{{ p.ass_size }}</span>
+    </div>
+    <div class="flex justify-between text-xl">
+      <span>Вес</span>
+      <span>{{ p.weight }}</span>
+    </div>
+  </div>
+</div>
+{%endfor%}
+            
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-col flex-1 border-2 border-customBlack rounded-lg p-4">
+
+            <h2 class="text-2xl font-bold mb-6 oswald-weight-medium">Выберите действие:</h2>
+
+            <div class="space-y-4 text-lg">
+              <a href="/chats"><button class="w-full oswald-weight-medium bg-black text-white py-3 rounded-full hover:bg-customGreen hover:text-black border-2 border-transparent hover:border-black transition-colors">Чат со стилистом</button></a>
+              <button class="w-full oswald-weight-medium bg-black text-white py-3 rounded-full hover:bg-customGreen hover:text-black border-2 border-transparent hover:border-black transition-colors" onclick="openVideoModal()">Видеозвонок стилисту</button>
+              <button class="w-full oswald-weight-medium bg-black text-white py-3 rounded-full hover:bg-customGreen hover:text-black border-2 border-transparent hover:border-black transition-colors">Разобрать гардероб</button>
+              <button class="w-full oswald-weight-medium bg-black text-white py-3 rounded-full hover:bg-customGreen hover:text-black border-2 border-transparent hover:border-black transition-colors">Составить капсулу</button>
+            </div>
+            
+          </div>
+  
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+<!-- Зеленая линия -->
+<div class="container mx-auto px-4">
+  <div class="w-full h-3 bg-customGreen mt-0"></div>
+  <div class="w-full h-6 bg-customBlack mt-0 rounded-b-lg"></div>
+</div>
+  
+  <!-- Модальное окно для видеозвонка -->
+  <dialog id="videoModal" class="fixed inset-0 w-full h-full bg-customBlack rounded-xl p-0 overflow-hidden">
+    <!-- Зеленая полоска -->
+    <div class="w-full h-6 bg-customGreen">
+      <button class="absolute right-4 top-2" onclick="closeVideoModal()">
+        <img src="{{ url_for('static', filename='assets/img/svg/close-modal.svg') }}" alt="">
+      </button>
+    </div>
+
+    <div class="w-full h-full flex flex-col items-center justify-center">
+        <!-- Аватар и имя -->
+        <div class="flex flex-col items-center mb-8">
+            <img src="{{ url_for('static', filename='assets/img/png/avatarStilist.png') }}" alt="Фото профиля" class="w-auto h-auto rounded-full mb-4">
+            <h3 class="text-white text-2xl">Екатерина</h3>
+        </div>
+        
+        <!-- Кнопки управления -->
+        <div class="flex gap-8">
+
+            <button class="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center hover:bg-gray-700">
+              <img src="{{ url_for('static', filename='assets/img/svg/camera.svg') }}" class="w-auto h-auto" alt="">
+            </button>
+
+            <button onclick="closeVideoModal()" class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700">
+              <img src="{{ url_for('static', filename='assets/img/svg/end-call.svg') }}" class="w-auto h-auto" alt="">
+            </button>
+
+            <button class="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center hover:bg-gray-700">
+              <img src="{{ url_for('static', filename='assets/img/svg/mic.svg') }}" class="w-auto h-auto" alt="">
+            </button>
+
+        </div>
+    </div>
+  </dialog>
+
+  <dialog id="orderHistoryModal" class="p-8 rounded-lg h-full w-full relative">
+    <!-- Добавляем кнопку закрытия -->
+    <button 
+      onclick="document.getElementById('orderHistoryModal').close()" 
+      class="absolute top-8 right-10">
+      <img src="{{ url_for('static', filename='assets/img/svg/close-modal.svg') }}" alt="Закрыть" class="w-6 h-6">
+    </button>
+
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl oswald-weight-medium">История заказов</h2>
+
+      <!-- Cards Container -->
+      <div class="w-full mx-auto mt-10">
+        <ul class="space-y-4">
+          <!-- Card 1 -->
+           {%for order in completed_orders%}
+          <li class="bg-white p-4 rounded-lg shadow-md border-2 border-customBlack flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <img src="{{ url_for('static', filename='assets/img/png/avatarStilist.png') }}" alt="Avatar" class="w-32 h-32 rounded-full object-cover">
+              <div class="space-y-2">
+                <h3 class="text-xl oswald-weight-medium">{{ order.stylist_name }}</h3>
+                <p class="text-lg text-customBlack oswald-weight-medium">
+                  {%if order.level == 0%}
+                  Junior
+                  {%elif order.level == 1%}
+                  Middle
+                  {%elif order.level == 2%}
+                  Senior
+                  {%endif%}
+                </p>
+                <div class="flex items-center gap-2">
+                  <div class="flex">
+                    {%if order.average_score is not none%}
+                    {%for i in range(order.average_score|round|int)%}
+                    <img src="{{ url_for('static', filename='assets/img/svg/star.svg') }}" alt="star" class="w-5 h-5">
+                    {%endfor%}
+                    {%else%}
+                    {%endif%}
+                  </div>
+                  {%if order.average_score is not none%}
+                  <span class="text-customBlack oswald-weight-medium">{{ order.average_score }}</span>
+                  {%else%}
+                  {%endif%}
+                </div>
+              </div>
+            </div>
+            {% set comment_exists = namespace(value=false) %}
+            {% for comment in current_user_comments %}
+              {% if comment.order_id|string == order.order_id|string %}
+                {% set comment_exists.value = true %}
+              {% endif %}
+            {% endfor %}
+            
+            {% if comment_exists.value %}
+              <p class="text-lg text-customBlack oswald-weight-medium">Отзыв оставлен</p>
+            {% else %}
+              <div class="flex flex-col space-y-2">
+                <button 
+                  onclick="openReviewModal('{{ order.stylist_id }}', '{{ order.order_id }}')" 
+                  class="bg-customBlack oswald-weight-medium text-white px-4 py-2 rounded-xl hover:bg-customGreen hover:text-black border-2 hover:border-customBlack border-transparent"
+                >
+                  Оставить отзыв
+                </button>
+              </div>
+            {% endif %}
+          </li>
+          {%endfor%}
+        </ul>
+      </div>
+    </div>
+  </dialog>
+
+
+  <dialog id="reviewModal" class="p-8 rounded-lg w-[500px]">
+    <div class="flex flex-col gap-6">
+      <h2 class="text-2xl oswald-weight-medium">Оставить отзыв</h2>
+      
+      <!-- Добавляем скрытое поле для stylistId -->
+      <input type="hidden" id="stylistId" value="">
+      <input type="hidden" id="orderId" value="">
+      
+      <!-- Заменяем кнопки на input -->
+      <div class="flex flex-col gap-2">
+        <label for="rating" class="text-lg oswald-weight-medium">Ваша оценка (от 1 до 5):</label>
+        <input 
+          type="number" 
+          id="rating" 
+          min="1" 
+          max="5" 
+          class="w-32 p-2 border-2 border-customBlack rounded-lg text-center text-lg" 
+          value="5"
+          onchange="validateRating(this)"
+        >
+      </div>
+
+      <!-- Текстовое поле для отзыва -->
+      <textarea 
+        class="w-full p-4 border-2 border-customBlack rounded-lg resize-none h-32 oswald-weight-medium" 
+        placeholder="Напишите ваш отзыв..."
+      ></textarea>
+
+      <!-- Кнопки -->
+      <div class="flex gap-4">
+        <button 
+          onclick="submitReview()" 
+          class="flex-1 oswald-weight-medium bg-black text-white px-6 py-2 rounded-full hover:bg-customGreen hover:text-black border-2 border-transparent hover:border-black transition-colors"
+        >
+          Отправить
+        </button>
+        <button 
+          onclick="closeReviewModal()" 
+          class="flex-1 oswald-weight-medium bg-white text-black px-6 py-2 rounded-full hover:bg-customGreen border-2 border-black transition-colors"
+        >
+          Отмена
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  
+  <script>
+    function openVideoModal() {
+        document.getElementById('videoModal').showModal();
+        document.body.style.overflow = 'hidden';
+    }
+  
+    function closeVideoModal() {
+        document.getElementById('videoModal').close();
+        document.body.style.overflow = 'auto';
+    }
+  
+    let currentSlide = 0;
+    const slider = document.getElementById('reviewsSlider');
+    const slides = slider.children;
+    
+    function showSlide(index) {
+      currentSlide = index;
+      const offset = -currentSlide * 100;
+      slider.style.transform = `translateX(${offset}%)`;
+    }
+    
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+    
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+  
+    function toggleMenu() {
+        const menu = document.getElementById('sideMenu');
+        const isOpen = menu.classList.contains('translate-x-0');
+        
+        if (isOpen) {
+            menu.classList.remove('translate-x-0');
+            menu.classList.add('translate-x-full');
+            document.body.style.overflow = 'auto';
+        } else {
+            menu.classList.remove('translate-x-full');
+            menu.classList.add('translate-x-0');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+  
+    function openReviewModal(stylistId, orderId) {
+      document.getElementById('reviewModal').showModal();
+      document.body.style.overflow = 'hidden';
+      document.getElementById('stylistId').value = stylistId;
+      document.getElementById('orderId').value = orderId;
+    }
+  
+    function closeReviewModal() {
+      document.getElementById('reviewModal').close();
+      document.body.style.overflow = 'auto';
+    }
+  
+    function validateRating(input) {
+      // Ограничиваем значение от 1 до 5
+      if (input.value > 5) input.value = 5;
+      if (input.value < 1) input.value = 1;
+      // Убираем десятичные значения
+      input.value = Math.floor(input.value);
+    }
+  
+    function submitReview() {
+      const rating = document.getElementById('rating').value;
+      const review = document.querySelector('textarea').value;
+      const stylistId = document.getElementById('stylistId').value;
+      const orderId = document.getElementById('orderId').value;
+      console.log('Отправляемые данные:', {
+        'ID стилиста': stylistId,
+        'ID заказа': orderId,
+        'Оценка': rating,
+        'Текст отзыва': review
+      });
+      
+      fetch('/submit_review', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          stylist_id: stylistId,
+          order_id: orderId,
+          score: rating,
+          text: review
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(data.success) {
+          // Если успешно - показываем сообщение
+          alert('Отзыв успешно отправлен');
+          // Обновляем страницу для отображения нового отзыва
+          location.reload();
+        } else {
+          // Если ошибка - показываем сообщение об ошибке
+          alert('Ошибка при отправке отзыва');
+        }
+      })
+      .catch(error => {
+        console.error('Ошибка:', error);
+        alert('Произошла ошибка при отправке отзыва');
+      });
+      console.log('Рейтинг:', rating, 'Отзыв:', review, 'ID стилиста:', stylistId, 'ID заказа:', orderId);
+      closeReviewModal();
+    }
+  </script>
+  
+  </body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="./static/css/output.css">
+      <link rel="stylesheet" href="./static/css/customStyles.css">
+      <title>CHIC - Главная</title>
+   </head>
+   <body class="bg-gray-100 font-sans">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between p-3 bg-customWhite shadow-md">
+      <!-- Logo -->
+      <div class="ml-20">
+        <a href="/">
+          <img src="./static/assets/img/svg/logoHead.svg" alt="">
+        </a>
+      </div>
+  
+      <!-- Navigation -->
+      <nav class="flex space-x-6 gap-5">
+        <button class="bg-black text-customWhite text-xl px-8 py-2 rounded-full hover:bg-gray-800">СТИЛИСТАМ</button>
+        <button class="bg-black text-customWhite text-xl px-8 py-2 rounded-full hover:bg-gray-800">РАЗБОР ГАРДЕРОБА</button>
+        <button class="bg-black text-customWhite text-xl px-8 py-2 rounded-full hover:bg-gray-800">КАПСУЛА</button>
+      </nav>
+  
+      <!-- Menu Icon -->
+      <div class="text-3xl cursor-pointer mr-10" onclick="toggleMenu()">
+        <img src="./static/assets/img/svg/burger-menu.svg" alt="">
+      </div>
+    </header>
+  
+    <!-- Main Content -->
+    <main class="flex flex-col items-center mt-12">
+      <!-- Image Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-20 px-4">
+        <!-- Image 1 -->
+        <div class="overflow-hidden">
+          <img src="./static/assets/img/png/card-1.png" alt="Image 1" class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition duration-300 ease-in-out">
+        </div>
+      
+        <!-- Image 2 -->
+        <div class="overflow-hidden">
+          <img src="./static/assets/img/png/card-2.png" alt="Image 2" class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition duration-300 ease-in-out">
+        </div>
+      
+        <!-- Image 3 -->
+        <div class="overflow-hidden">
+          <img src="./static/assets/img/png/card-3.png" alt="Image 3" class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition duration-300 ease-in-out">
+        </div>
+      </div>
+  
+      <!-- Login Button -->
+       <a href="/auth">
+        <button class="mt-10 text-xl px-8 py-4 bg-lime-400 text-black font-semibold rounded-full hover:bg-lime-500 transition">
+          ВОЙТИ
+        </button>
+       </a>
+
+    </main>
+
+    <script>
+      function toggleMenu() {
+          const menu = document.getElementById('sideMenu');
+          const isOpen = menu.classList.contains('translate-x-0');
+          
+          if (isOpen) {
+              menu.classList.remove('translate-x-0');
+              menu.classList.add('translate-x-full');
+              document.body.style.overflow = 'auto';
+          } else {
+              menu.classList.remove('translate-x-full');
+              menu.classList.add('translate-x-0');
+              document.body.style.overflow = 'hidden';
+          }
+      }
+      
+      // ... другие функции для работы с видео и слайдером ...
+  </script>
+
+  <!-- Боковое меню -->
+  <div id="sideMenu" class="fixed top-0 right-0 h-full w-80 bg-customWhite transform translate-x-full transition-transform duration-300 ease-in-out shadow-lg z-50">
+    <!-- Кнопка закрытия -->
+    <button onclick="toggleMenu()" class="absolute top-6 right-6">
+      <img src="{{ url_for('static', filename='assets/img/svg/close-modal.svg') }}" alt="Закрыть" class="w-6 h-6">
+    </button>
+    
+    <!-- Содержимое меню -->
+    <div class="p-8 mt-16">
+      <nav class="space-y-4">
+        <a href="{{ url_for('lkST') }}" class="block oswald-weight-medium text-2xl hover:text-customGreen flex items-center gap-3">
+          <img src="{{ url_for('static', filename='assets/img/svg/profile.svg') }}" alt="" class="w-12 h-12">
+          Профиль
+        </a>
+        <!-- ... остальные пункты меню ... -->
+      </nav>
+    </div>
+  </div>
+  
+  </body>
+</html>

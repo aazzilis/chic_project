@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/css/output.css">
+    <link rel="stylesheet" href="./static/css/customStyles.css">
+    <title>Выбор стиля</title>
+</head>
+<body class="bg-gray-200">
+    <!-- Main Content -->
+    <main class="flex flex-col items-center justify-center h-screen">
+        <!-- Wrapper for Logo, Container, and Stripes -->
+        <div class="w-full max-w-4xl">
+            <!-- Logo Section -->
+            <div class="flex justify-start items-start pb-5">
+                <img src="./static/assets/img/svg/logo.svg" alt="Логотип">
+            </div>
+
+            <!-- Question Section -->
+            <div class="bg-customWhite p-8 shadow-md">
+                <form method="post" class="space-y-6">
+                    <!-- Option 1: Новый стиль -->
+                    <label class="block">
+                        <input type="radio" name="style_choice" value="new" class="hidden">
+                        <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                            <h3 class="text-xl font-semibold text-gray-700 text-start">Хочу абсолютно новый стиль. Готова к экспериментам</h3>
+                        </div>
+                    </label>
+
+                    <!-- Option 2: 50/50 -->
+                    <label class="block">
+                        <input type="radio" name="style_choice" value="mixed" class="hidden">
+                        <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                            <h3 class="text-xl font-semibold text-gray-700 text-start">50/50 - действуем аккуратно</h3>
+                        </div>
+                    </label>
+
+                    <!-- Option 3: Сохранить стиль -->
+                    <label class="block">
+                        <input type="radio" name="style_choice" value="keep" class="hidden">
+                        <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                            <h3 class="text-xl font-semibold text-gray-700 text-start">Хочу, чтобы мой стиль остался неизменным</h3>
+                        </div>
+                    </label>
+
+                    <div class="flex justify-end mt-10">
+                        <div class="border-2 border-customBlack rounded-full py-1 px-2 flex items-center">
+                            <button type="submit" name="action" value="prev">
+                                <img src="{{ url_for('static', filename='assets/img/png/prev.png') }}" alt="Назад">
+                            </button>
+                            
+                            <!-- Separator -->
+                            <div class="w-1 h-8 bg-customBlack mx-2"></div>
+                            
+                            <button type="submit" name="action" value="next">
+                                <img src="{{ url_for('static', filename='assets/img/png/next.png') }}" alt="Вперед">
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Green and Black Stripes -->
+            <div class="w-full h-4 bg-customGreen"></div>
+            <div class="w-full h-8 bg-customBlack"></div>
+
+            <div class="absolute right-28 top-72">
+                <img src="./static/assets/img/png/janna-full.png" alt="">
+            </div>
+        </div>
+    </main>
+</body>
+</html>

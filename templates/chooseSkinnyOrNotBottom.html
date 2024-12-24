@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/customStyles.css') }}">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="bg-customGray flex flex-col items-center justify-center h-screen">
+
+        <!-- Logo Section -->
+        <div class="w-full max-w-4xl flex justify-start items-start pb-5">
+            <img src="./static/assets/img/svg/logo.svg" alt="">
+        </div>
+
+        <!-- Wrapper for Container and Stripes -->
+        <div class="w-full max-w-4xl border border-customBlack">
+
+            <!-- Main Container -->
+            <div class="bg-customWhite p-8 shadow-md">
+                <form method="post" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <div class="space-y-2">
+                                <div class="checkbox-container" onclick="toggleCheckbox('everyday1')">
+                                    <input type="checkbox" id="everyday1" name="skinny_or_not_bottom" value="облегающе">
+                                    <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-everyday1">
+                                    <label for="everyday1">Облегающе</label>
+                                </div>
+                            
+                                <div class="checkbox-container" onclick="toggleCheckbox('everyday2')">
+                                    <input type="checkbox" id="everyday2" name="skinny_or_not_bottom" value="по_размеру">
+                                    <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-everyday2">
+                                    <label for="everyday2">По размеру</label>
+                                </div>
+
+                                <div class="checkbox-container" onclick="toggleCheckbox('everyday3')">
+                                    <input type="checkbox" id="everyday3" name="skinny_or_not_bottom" value="свободно">
+                                    <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-everyday3">
+                                    <label for="everyday2">Свободно</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end mt-6">
+                        <div class="border-2 border-customBlack rounded-full py-1 px-2 flex items-center">
+                            <button type="submit" name="action" value="prev">
+                                <img src="{{ url_for('static', filename='assets/img/png/prev.png') }}" alt="Previous">
+                            </button>
+                            
+                            <!-- Separator -->
+                            <div class="w-1 h-8 bg-customBlack mx-2"></div>
+                            
+                            <button type="submit" name="action" value="next">
+                                <img src="{{ url_for('static', filename='assets/img/png/next.png') }}" alt="Next">
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Green and Black Stripes -->
+            <div class="w-full h-4 bg-customGreen"></div>
+            <div class="w-full h-8 bg-customBlack"></div>
+        </div>
+
+        <div class="absolute right-28 top-72">
+            <img src="./static/assets/img/png/janna-full.png" alt="">
+        </div>
+
+    </div>
+
+    <script>
+        function toggleCheckbox(id) {
+    const checkbox = document.getElementById(id);
+    const img = document.getElementById(`img-${id}`);
+    checkbox.checked = !checkbox.checked;
+    img.src = checkbox.checked ? './static/assets/img/svg/crystallActive.svg' : './static/assets/img/svg/crystall.svg';
+}
+    </script>
+
+</body>
+</html>

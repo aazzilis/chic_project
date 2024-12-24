@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./static/css/output.css">
+        <link rel="stylesheet" href="./static/css/customStyles.css">
+        <title>Document</title>
+     </head>
+     <body class="bg-customGray">
+        <!-- Main Content -->
+        <main class="flex items-center justify-center h-screen">
+            <!-- Wrapper for Container and Stripes -->
+            <div class="w-full max-w-4xl">
+
+                <div class="w-full max-w-4xl flex justify-start items-start pb-5">
+                    <img src="./static/assets/img/svg/logo.svg" alt="">
+                </div>
+                <!-- Card Selection Section -->
+                <div class="bg-customWhite p-8 shadow-md relative">
+
+                    <!-- 1 элемент -->
+                    <div class="flex justify-center items-center">
+                        <img src="./static/assets/img/png/edick2.png" alt="Логотип" class="max-w-full h-auto">
+                    </div>
+                    <!-- 2 элемент -->
+                    <div class="absolute top-10 right-72">
+                        <img src="./static/assets/img/svg/likeWhite.svg" alt="Like" class="checkbox-image" id="likeCheckbox1" onclick="toggleCheckboxImage('likeCheckbox1')">
+                    </div>
+                    <!-- 3 элемент -->
+                    <div class="absolute top-10 left-72">
+                        <img src="./static/assets/img/svg/likeWhite.svg" alt="Like" class="checkbox-image" id="likeCheckbox2" onclick="toggleCheckboxImage('likeCheckbox2')">
+                    </div>
+                    <!-- 4 элемент -->
+                    <div class="absolute top-56 left-72">
+                        <img src="./static/assets/img/svg/likeWhite.svg" alt="Like" class="checkbox-image" id="likeCheckbox3" onclick="toggleCheckboxImage('likeCheckbox3')">
+                    </div>
+                    <!-- 5 элемент -->
+                    <div class="absolute top-52 right-96">
+                        <img src="./static/assets/img/svg/likeWhite.svg" alt="Like" class="checkbox-image" id="likeCheckbox4" onclick="toggleCheckboxImage('likeCheckbox4')">
+                    </div>
+                    <!-- 6 элемент -->
+                    <div class="absolute top-72 right-80">
+                        <img src="./static/assets/img/svg/likeWhite.svg" alt="Like" class="checkbox-image" id="likeCheckbox5" onclick="toggleCheckboxImage('likeCheckbox5')">
+                    </div>
+
+                    <div class="flex justify-end mt-6">
+                        <div class="border-2 border-customBlack rounded-full py-1 px-2 flex items-center">
+                            <button onclick="window.location.href='skin1man.html'">
+                                <img src="./static/assets/img/png/prev.png" alt="">
+                            </button>
+                            
+                            <!-- Separator -->
+                            <div class="w-1 h-8 bg-customBlack mx-2"></div>
+                            
+                            <button onclick="window.location.href='skin3man.html'">
+                                <img src="./static/assets/img/png/next.png" alt="">
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="absolute right-28 top-72">
+                    <img src="./static/assets/img/png/edick-skin2.png" alt="">
+                </div>
+
+                <!-- Green and Black Stripes -->
+                <div class="w-full h-4 bg-customGreen"></div>
+                <div class="w-full h-8 bg-customBlack"></div>
+            </div>
+        </main>
+
+        <script>
+            function toggleCheckboxImage(clickedId, otherId) {
+                const clickedImage = document.getElementById(clickedId);
+                const otherImage = document.getElementById(otherId);
+    
+                // Toggle the clicked image
+                clickedImage.src = clickedImage.src.includes('likeWhite.svg') ? './static/assets/img/svg/likeRed.svg' : './static/assets/img/svg/likeWhite.svg';
+    
+                // Change the state of the other image
+                otherImage.src = otherImage.src.includes('likeWhite.svg') ? './static/assets/img/svg/likeRed.svg' : './static/assets/img/svg/likeWhite.svg';
+            }
+        </script>
+
+    </body>
+</html>

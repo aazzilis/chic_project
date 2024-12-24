@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/customStyles.css') }}">
+        <title>Document</title>
+</head>
+<body class="bg-gray-200">
+    <!-- Main Content -->
+    <main class="flex items-center justify-center h-screen">
+        <!-- Wrapper for Container and Stripes -->
+        <div class="w-full max-w-4xl">
+            <div class="w-full max-w-4xl flex justify-start items-start pb-5">
+                <img src="{{ url_for('static', filename='assets/img/svg/logo.svg') }}" alt="Logo">
+            </div>
+            <!-- Card Selection Section -->
+            <div class="bg-customWhite p-8 shadow-md relative">
+                <div class="flex flex-col items-center mt-6">
+                    <form id="lengthForm" method="POST">
+                        <!-- Скрытое поле для хранения множественного выбора -->
+                        <input type="hidden" name="selectedLength" id="selectedLength">
+                        
+                        <div class="flex justify-center gap-10 mt-5">
+                            <!-- Card 1 -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-auto h-auto border-2 border-customBlack cursor-pointer" onclick="toggleSquare(this, 'mini')" data-length-type="mini">
+                                    <img src="{{ url_for('static', filename='assets/img/png/lenght1.png') }}" alt="Mini" class="w-full h-full object-cover">
+                                </div>
+                                <span class="mt-2 text-sm text-center">Мини</span>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-auto h-auto border-2 border-customBlack cursor-pointer" onclick="toggleSquare(this, 'midi')" data-length-type="midi">
+                                    <img src="{{ url_for('static', filename='assets/img/png/lenght2.png') }}" alt="Midi" class="w-full h-full object-cover">
+                                </div>
+                                <span class="mt-2 text-sm text-center">Миди</span>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-auto h-auto border-2 border-customBlack cursor-pointer" onclick="toggleSquare(this, 'maxi')" data-length-type="maxi">
+                                    <img src="{{ url_for('static', filename='assets/img/png/lenght3.png') }}" alt="Maxi" class="w-full h-full object-cover">
+                                </div>
+                                <span class="mt-2 text-sm text-center">Длинная</span>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="flex justify-end mt-6">
+                            <div class="border-2 border-customBlack rounded-full py-1 px-2 flex items-center">
+                                <button type="submit" name="action" value="previous">
+                                    <img src="{{ url_for('static', filename='assets/img/png/prev.png') }}" alt="Previous">
+                                </button>
+                                
+                                <!-- Separator -->
+                                <div class="w-1 h-8 bg-customBlack mx-2"></div>
+                                
+                                <button type="submit" name="action" value="next">
+                                    <img src="{{ url_for('static', filename='assets/img/png/next.png') }}" alt="Next">
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Green and Black Stripes -->
+                <div class="w-full h-4 bg-customGreen"></div>
+                <div class="w-full h-8 bg-customBlack"></div>
+            </div>
+
+            <div class="absolute right-28 top-72">
+                <div class="rounded-xl bg-customWhite text-center border border-customBlack text-xl px-8 py-4">
+                    <p>Какая длина вам нравится?</p>
+                </div>
+                <img src="{{ url_for('static', filename='assets/img/png/janna-skin10.png') }}" alt="Janna">
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        let selectedTypes = new Set();
+
+        function toggleSquare(element, lengthType) {
+            // Переключаем класс selected
+            element.classList.toggle('selected');
+            
+            // Добавляем или удаляем тип из набора выбранных
+            if (element.classList.contains('selected')) {
+                selectedTypes.add(lengthType);
+            } else {
+                selectedTypes.delete(lengthType);
+            }
+            
+            // Обновляем скрытое поле
+            document.getElementById('selectedLength').value = Array.from(selectedTypes).join(',');
+            
+            // Опционально: отправляем данные на сервер
+            sendDataToServer(Array.from(selectedTypes));
+        }
+
+        function sendDataToServer(selectedLength) {
+            fetch('/your-backend-endpoint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    selectedLength: selectedLength
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+    
+</body>
+</html>

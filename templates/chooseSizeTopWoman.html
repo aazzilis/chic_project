@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/customStyles.css') }}">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="bg-customGray flex flex-col items-center justify-center h-screen">
+
+        <!-- Logo Section -->
+        <div class="w-full max-w-4xl flex justify-start items-start pb-5">
+            <img src="{{ url_for('static', filename='assets/img/svg/logo.svg') }}" alt="">
+        </div>
+
+        <!-- Wrapper for Container and Stripes -->
+        <div class="w-full max-w-4xl border border-customBlack">
+
+            <!-- Main Container -->
+            <div class="bg-customWhite p-8 shadow-md">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <form method="post" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- First Column -->
+                        <div class="space-y-2">
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday1')">
+                                <input type="checkbox" name="size" id="everyday1" value="38">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-everyday1">
+                                <label for="everyday1">38 (XXS)</label>
+                            </div>
+                            
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday2')">
+                                <input type="checkbox" name="size" id="everyday2" value="40">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-everyday2">
+                                <label for="everyday2">40 (XXS / XS)</label>
+                            </div>
+                            
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday3')">
+                                <input type="checkbox" name="size" id="everyday3" value="42">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-everyday3">
+                                <label for="everyday3">42 (XS)</label>
+                            </div>
+                            
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday4')">
+                                <input type="checkbox" name="size" id="everyday4" value="44">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-everyday4">
+                                <label for="everyday4">44 (S)</label>
+                            </div>
+
+                            <div class="checkbox-container" onclick="toggleCheckbox('everyday5')">
+                                <input type="checkbox" name="size" id="everyday5" value="46">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-everyday5">
+                                <label for="everyday4">46 (M)</label>
+                            </div>
+                        </div>
+
+                        <!-- Second Column -->
+                        <div class="space-y-2">
+                            <div class="checkbox-container" onclick="toggleCheckbox('home1')">
+                                <input type="checkbox" name="size" id="home1" value="48">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-home1">
+                                <label for="home1">48 (M / L)</label>
+                            </div>
+                            
+                            <div class="checkbox-container" onclick="toggleCheckbox('home2')">
+                                <input type="checkbox" name="size" id="home2" value="50">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-home2">
+                                <label for="home2">50 (L)</label>
+                            </div>
+                            
+                            <div class="checkbox-container" onclick="toggleCheckbox('home3')">
+                                <input type="checkbox" name="size" id="home3" value="52">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-home3">
+                                <label for="home3">52(XL)</label>
+                            </div>
+                            
+                            <div class="checkbox-container" onclick="toggleCheckbox('home4')">
+                                <input type="checkbox" name="size" id="home4" value="54">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-home4">
+                                <label for="home4">54 (XL)</label>
+                            </div>
+
+                            <div class="checkbox-container" onclick="toggleCheckbox('home5')">
+                                <input type="checkbox" name="size" id="home5" value="56">
+                                <img src="{{ url_for('static', filename='assets/img/svg/crystall.svg') }}" alt="Unchecked" class="checkbox-image" id="img-home5">
+                                <label for="home4">56 (XXL)</label>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons - Moved inside form -->
+                        <div class="col-span-2 flex justify-end mt-6">
+                            <div class="border-2 border-customBlack rounded-full py-1 px-2 flex items-center">
+                                <button type="submit" name="action" value="previous">
+                                    <img src="{{ url_for('static', filename='assets/img/png/prev.png') }}" alt="Previous">
+                                </button>
+                                
+                                <!-- Separator -->
+                                <div class="w-1 h-8 bg-customBlack mx-2"></div>
+                                
+                                <button type="submit" name="action" value="next">
+                                    <img src="{{ url_for('static', filename='assets/img/png/next.png') }}" alt="Next">
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Green and Black Stripes -->
+            <div class="w-full h-4 bg-customGreen"></div>
+            <div class="w-full h-8 bg-customBlack"></div>
+        </div>
+
+        <div class="absolute right-28 top-72">
+            <img src="{{ url_for('static', filename='assets/img/png/janna-full.png') }}" alt="">
+        </div>
+
+    </div>
+
+    <script>
+        function toggleCheckbox(id) {
+    const checkbox = document.getElementById(id);
+    const img = document.getElementById(`img-${id}`);
+    checkbox.checked = !checkbox.checked;
+    img.src = checkbox.checked 
+        ? "{{ url_for('static', filename='assets/img/svg/crystallActive.svg') }}"
+        : "{{ url_for('static', filename='assets/img/svg/crystall.svg') }}";
+}
+    </script>
+
+</body>
+</html>

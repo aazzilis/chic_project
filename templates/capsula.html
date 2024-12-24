@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/css/output.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/css/customStyles.css') }}"
+    />
+      <title>Выбор пола</title>
+   </head>
+   <body class="bg-customWhite">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between p-6 bg-customWhite shadow-md">
+      <!-- Logo -->
+      <div class="ml-20">
+        <img src="./static/assets/img/svg/logoHead.svg" alt="">
+      </div>
+  
+      <!-- Navigation -->
+      <nav class="flex space-x-6 gap-5">
+        <button class="bg-black text-customWhite text-xl px-8 py-4 rounded-full hover:bg-gray-800">СТИЛИСТАМ</button>
+        <button class="bg-black text-customWhite text-xl px-8 py-4 rounded-full hover:bg-gray-800">РАЗБОР ГАРДЕРОБА</button>
+        <button class="bg-black text-customWhite text-xl px-8 py-4 rounded-full hover:bg-gray-800">КАПСУЛА</button>
+      </nav>
+  
+      <!-- Menu Icon -->
+      <div class="text-3xl cursor-pointer mr-10">
+        <img src="{{ url_for('static', filename= 'assets/img/svg/burger-menu.svg') }}" alt="">
+      </div>
+    </header>
+  
+    <main class="relative min-h-screen bg-gradient-to-t from-customGreen to-gray-200">
+      <div class="container mx-auto px-4 py-20 flex flex-col items-center justify-center text-center">
+          <h1 class="text-8xl font-black mb-8 tracking-wider text-black">CAPSULA</h1>
+          <p class="text-xl mb-10 text-black max-w-2xl">
+              Открыть капсулу, чтобы посмотреть готовые образы от стилиста
+          </p>
+          <button class="bg-black text-white px-12 py-4 rounded-full text-xl hover:bg-opacity-90 transition-all duration-300">
+              РАСКРЫТЬ КАПСУЛУ
+          </button>
+      </div>
+
+      <!-- Model Image -->
+      <div class="absolute right-10 top-0 w-auto h-screen flex items-center justify-end">
+          <img src="{{ url_for('static', filename= 'assets/img/png/capsula.png') }}" alt="Model" class="object-cover">
+      </div>
+      
+  </main>
+  
+    <!-- Footer Section -->
+    <footer class="bg-black text-white py-8">
+      <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Познакомьтесь с нами -->
+          <div>
+              <h3 class="text-xl mb-4 border-b border-white inline-block oswald-weight-medium">Познакомьтесь с нами</h3>
+              <ul class="space-y-2">
+                  <li><a href="faq.html" class="hover:text-customGreen oswald-weight-medium">FAQ</a></li>
+                  <li><a href="team.html" class="hover:text-customGreen oswald-weight-medium">Наша команда</a></li>
+                  <li><a href="#" class="hover:text-customGreen oswald-weight-medium">Составить капсулу</a></li>
+                  <li><a href="#" class="hover:text-customGreen oswald-weight-medium">Разобрать гардероб</a></li>
+              </ul>
+          </div>
+  
+          <!-- Компания -->
+          <div>
+              <h3 class="text-xl mb-4 border-b border-white inline-block oswald-weight-medium oswald-weight-medium">Компания</h3>
+              <ul class="space-y-2">
+                  <li><a href="about.html" class="hover:text-customGreen oswald-weight-medium">О нас</a></li>
+                  <li><a href="cabinet.html" class="hover:text-customGreen oswald-weight-medium">Вход в ЛК</a></li>
+                  <li><a href="contacts.html" class="hover:text-customGreen oswald-weight-medium">Контакты</a></li>
+              </ul>
+          </div>
+  
+          <!-- Получить услугу -->
+          <div>
+              <h3 class="text-xl mb-4 border-b border-white inline-block oswald-weight-medium">Получить услугу</h3>
+              <div class="flex items-center bg-white rounded-full overflow-hidden mb-4">
+                  <div class="flex-1 flex items-center pl-4">
+                      <img src="{{ url_for('static', filename= 'assets/img/svg/lupa.svg') }}" alt="Search" class="w-5 h-5">
+                      <input type="text" placeholder="Найти стилиста для услуги..." 
+                             class="w-full px-3 py-2 oswald-weight-medium text-black focus:outline-none">
+                  </div>
+                  <button class="bg-customGreen text-black px-6 py-2 font-bold oswald-weight-medium">
+                      Найти
+                  </button>
+              </div>
+              
+              <div class="flex flex-wrap gap-4">
+                  <button class="bg-customGreen oswald-weight-medium text-black px-6 py-2 rounded-full font-bold hover:bg-opacity-90">
+                      Просмотреть примеры работ
+                  </button>
+                  <button class="bg-customGreen oswald-weight-medium text-black px-6 py-2 rounded-full font-bold hover:bg-opacity-90">
+                      Зарегистрироваться
+                  </button>
+              </div>
+          </div>
+          
+      </div>
+  
+      <!-- Нижняя часть футера -->
+      <div class="container mx-auto px-4 mt-8 flex justify-between items-center">
+          <div class="flex gap-4">
+              <a href="#"><img src="{{ url_for('static', filename= 'assets/img/svg/lupa.svg') }}" alt="VK" class="w-6 h-6"></a>
+              <a href="#"><img src="{{ url_for('static', filename= 'assets/img/svg/tg-logo.svg') }}" alt="Telegram" class="w-6 h-6"></a>
+          </div>
+          <p class="text-base oswald-weight-medium">Copyright © RUSSIA 2024. Все права защищены</p>
+      </div>
+  </footer>
+  </body>
+</html>

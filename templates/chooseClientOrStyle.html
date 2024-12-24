@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/css/output.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/css/customStyles.css') }}"
+    />
+      <title>Выбор пола</title>
+   </head>
+   <body class="bg-gray-200">
+      <!-- Main Content -->
+      <main class="flex items-center justify-center h-screen">
+         <!-- Main Section -->
+         <div class="flex flex-col md:flex-row items-center bg-gray-100 shadow-lg rounded-lg p-6 space-x-0 md:space-x-12">
+            <!-- Form Section -->
+            <form method="post" class="w-full">
+               <div class="">
+                  <h2 class="text-2xl font-bold mb-6 text-center">Выберите вашу категорию</h2>
+                  <!-- Кнопки выбора пола -->
+                  <div class="flex flex-col space-y-6">
+                     <!-- Радиокнопка для Мужского пола -->
+                     <label for="male" class="w-full">
+                        <input type="radio" id="male" name="gender" value="male" class="hidden peer">
+                        <div class="w-full px-6 py-3 bg-gray-300 text-gray-800 font-bold rounded-lg text-center peer-checked:bg-black peer-checked:text-white transition duration-300 cursor-pointer">
+                           <a href="{{url_for('registrationCL_page')}}">Клиент</a>
+                        </div>
+                     </label>
+                     <!-- Радиокнопка для Женского пола -->
+                     <label for="female" class="w-full">
+                        <input type="radio" id="female" name="gender" value="female" class="hidden peer">
+                        <div class="w-full px-6 py-3 bg-gray-300 text-gray-800 font-bold rounded-lg text-center peer-checked:bg-black peer-checked:text-white transition duration-300 cursor-pointer">
+                           <a href="{{url_for('registrationST_page')}}">Стилист</a>
+                        </div>
+                     </label>
+                  </div>
+
+                  
+
+               </div>
+            </form>
+
+            <!-- Assistant Section -->
+            <div class="w-full md:w-1/2 flex justify-center">
+               <div class="relative">
+                  <img src="{{ url_for('static', filename= 'assets/img/png/janna-hello.png') }}" alt="Иконка" class="w-48 h-48 object-cover rounded-full">
+                  <div class="absolute top-0 mx-auto -mt-12 mr-4 bg-customWhite p-4 rounded-lg shadow-md text-center">
+                     <p class="text-sm font-bold">Кто вы?</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </main>
+   </body>
+</html>

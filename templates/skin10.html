@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/customStyles.css') }}">
+        <title>Document</title>
+     </head>
+     <body class="bg-customGray">
+        <!-- Main Content -->
+        <main class="flex items-center justify-center h-screen">
+            <!-- Wrapper for Container and Stripes -->
+            <div class="w-full max-w-4xl">
+
+                <div class="w-full max-w-4xl flex justify-start items-start pb-5">
+                    <img src="{{ url_for('static', filename='assets/img/svg/logo.svg') }}" alt="">
+                </div>
+                <!-- Card Selection Section -->
+                <div class="bg-customWhite p-8 shadow-md relative">
+                    <form method="post">
+                        <div class="flex justify-center items-center">
+                            <img src="{{ url_for('static', filename='assets/img/png/skin10.png') }}" alt="Логотип" class="max-w-full h-auto">
+                        </div>
+
+                        <div class="absolute top-10 right-64">
+                            <img src="{{ url_for('static', filename='assets/img/svg/likeWhite.svg') }}" alt="Like" class="checkbox-image" id="likeCheckbox1" onclick="toggleCheckboxImage('likeCheckbox1')">
+                            <input type="hidden" id="likeCheckboxState1" name="likeCheckboxState1" value="face">
+                        </div>
+
+                        <div class="absolute top-10 left-72">
+                            <img src="/assets/img/svg/likeWhite.svg" alt="Like" class="checkbox-image" id="likeCheckbox2" onclick="toggleCheckboxImage('likeCheckbox2')">
+                            <input type="hidden" id="likeCheckboxState2" name="likeCheckboxState2" value="hair">
+                        </div>
+
+                        <div class="absolute top-72 left-72">
+                            <img src="/assets/img/svg/likeWhite.svg" alt="Like" class="checkbox-image" id="likeCheckbox3" onclick="toggleCheckboxImage('likeCheckbox3')">
+                            <input type="hidden" id="likeCheckboxState3" name="likeCheckboxState3" value="dress">
+                        </div>
+
+                        <div class="absolute top-52 right-96">
+                            <img src="/assets/img/svg/likeWhite.svg" alt="Like" class="checkbox-image" id="likeCheckbox4" onclick="toggleCheckboxImage('likeCheckbox4')">
+                            <input type="hidden" id="likeCheckboxState4" name="likeCheckboxState4" value="accessories">
+                        </div>
+
+                        <div class="absolute top-72 right-64">
+                            <img src="/assets/img/svg/likeWhite.svg" alt="Like" class="checkbox-image" id="likeCheckbox5" onclick="toggleCheckboxImage('likeCheckbox5')">
+                            <input type="hidden" id="likeCheckboxState5" name="likeCheckboxState5" value="style">
+                        </div>
+
+                        <div class="flex justify-end mt-6">
+                            <div class="border-2 border-customBlack rounded-full py-1 px-2 flex items-center">
+                                <button type="submit" name="action" value="previous">
+                                    <img src="{{ url_for('static', filename='assets/img/png/prev.png') }}" alt="Previous">
+                                </button>
+                                
+                                <!-- Separator -->
+                                <div class="w-1 h-8 bg-customBlack mx-2"></div>
+                                
+                                <button type="submit" name="action" value="next">
+                                    <img src="{{ url_for('static', filename='assets/img/png/next.png') }}" alt="Next">
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="absolute right-28 top-72">
+
+                    <div class="rounded-xl bg-customWhite text-center border border-customBlack text-xl px-8 py-4">
+                        <p>Как вам образ?</p>
+                    </div>
+
+                    <img src="{{ url_for('static', filename='assets/img/png/janna-skin10.png') }}" alt="">
+                </div>
+
+                <!-- Green and Black Stripes -->
+                <div class="w-full h-4 bg-customGreen"></div>
+                <div class="w-full h-8 bg-customBlack"></div>
+            </div>
+        </main>
+
+        <script>
+            function toggleCheckboxImage(clickedId, otherId) {
+                const clickedImage = document.getElementById(clickedId);
+                const otherImage = document.getElementById(otherId);
+    
+                // Toggle the clicked image
+                clickedImage.src = clickedImage.src.includes('likeWhite.svg') 
+                    ? "{{ url_for('static', filename='assets/img/svg/likeRed.svg') }}" 
+                    : "{{ url_for('static', filename='assets/img/svg/likeWhite.svg') }}";
+    
+                // Change the state of the other image
+                otherImage.src = otherImage.src.includes('likeWhite.svg') 
+                    ? "{{ url_for('static', filename='assets/img/svg/likeRed.svg') }}" 
+                    : "{{ url_for('static', filename='assets/img/svg/likeWhite.svg') }}";
+            }
+        </script>
+
+    </body>
+</html>
